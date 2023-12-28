@@ -1,0 +1,18 @@
+package:
+  build:
+    censor_project_warnings:
+      - ImplicitQualifiedImportReExport
+      - HidingImport
+  name: gojs
+  dependencies:
+    - lists
+    - console
+    - nullable
+    - prelude
+    - typelevel-prelude
+    - variant
+workspace:
+  package_set:
+    registry: 47.8.0
+  extra_packages: {}
+
