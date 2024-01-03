@@ -27,6 +27,7 @@ _deletesTree = getUnsafe ["deletesTree"]
 _deletesConnectedLinks :: CommandHandler_ -> Boolean
 _deletesConnectedLinks = getUnsafe ["deletesConnectedLinks"]
 
+-- Read-only
 _diagram :: CommandHandler_ -> Diagram_
 _diagram = getUnsafe ["diagram"]
 
