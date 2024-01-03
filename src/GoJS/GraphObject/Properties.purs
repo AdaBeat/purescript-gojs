@@ -2,14 +2,15 @@ module GoJS.GraphObject.Properties where
 
 import Prelude
 
-import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
-import GoJS.Diagram.Types (Diagram_)
-import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, Panel_)
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
+import GoJS.Diagram.Types (Diagram_, Layer_)
 import GoJS.EnumValue (EnumValue_)
+import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, Panel_)
 import GoJS.Unsafe (getUnsafe)
 
+-- Read-only
 _actualBounds :: forall g. IsGraphObject g => g -> Rect_
 _actualBounds = getUnsafe [ "actualBounds" ]
 
@@ -31,6 +32,7 @@ _column = getUnsafe [ "column" ]
 _columnSpan :: forall g. IsGraphObject g => g -> Number
 _columnSpan = getUnsafe [ "columnSpan" ]
 
+-- TODO: Can be HTMLInfo.
 _contextMenu :: forall g. IsGraphObject g => g -> Maybe Adornment_
 _contextMenu = toMaybe <<< getUnsafe [ "contextMenu" ]
 
@@ -40,7 +42,9 @@ _cursor = getUnsafe [ "cursor" ]
 _desiredSize :: forall g. IsGraphObject g => g -> Size_
 _desiredSize = getUnsafe [ "desiredSize" ]
 
-_diagram :: forall g. IsGraphObject g => g -> Diagram_ -- TODO: Can be null sometimes
+-- Read-only
+-- TODO: Can be null, but in the vast majority of cases is not.
+_diagram :: forall g. IsGraphObject g => g -> Diagram_
 _diagram = getUnsafe [ "diagram" ]
 
 _fromEndSegmentLength :: forall g. IsGraphObject g => g -> Number
@@ -73,7 +77,8 @@ _isActionable = getUnsafe [ "isActionable" ]
 _isPanelMain :: forall g. IsGraphObject g => g -> Boolean
 _isPanelMain = getUnsafe [ "isPanelMain" ]
 
-_layer :: forall g. IsGraphObject g => g -> String -- TODO: Can be class Layer
+-- Read-only
+_layer :: forall g. IsGraphObject g => g -> Layer_
 _layer = getUnsafe [ "layer" ]
 
 _margin :: forall g. IsGraphObject g => g -> Margin_
@@ -82,6 +87,7 @@ _margin = getUnsafe [ "margin" ]
 _maxSize :: forall g. IsGraphObject g => g -> Size_
 _maxSize = getUnsafe [ "maxSize" ]
 
+-- Read-only
 _measuredBounds :: forall g. IsGraphObject g => g -> Rect_
 _measuredBounds = getUnsafe [ "measuredBounds" ]
 
@@ -91,15 +97,18 @@ _minSize = getUnsafe [ "minSize" ]
 _name :: forall g. IsGraphObject g => g -> String
 _name = getUnsafe [ "name" ]
 
+-- Read-only
 _naturalBounds :: forall g. IsGraphObject g => g -> Rect_
 _naturalBounds = getUnsafe [ "naturalBounds" ]
 
 _opacity :: forall g. IsGraphObject g => g -> Number
 _opacity = getUnsafe [ "opacity" ]
 
+-- Read-only
 _panel :: forall g. IsGraphObject g => g -> Maybe Panel_
 _panel = toMaybe <<< getUnsafe [ "panel" ]
 
+-- Read-only
 _part :: forall g @p. IsGraphObject g => IsPart p => g -> Maybe p
 _part = toMaybe <<< getUnsafe [ "part" ]
 
@@ -160,6 +169,7 @@ _toShortLengh = getUnsafe [ "toShortLengh" ]
 _toSpot :: forall g. IsGraphObject g => g -> Spot_
 _toSpot = getUnsafe [ "toSpot" ]
 
+-- TODO: Can be HTMLInfo.
 _toolTip :: forall g. IsGraphObject g => g -> Maybe Adornment_
 _toolTip = toMaybe <<< getUnsafe [ "toolTip" ]
 

@@ -1,12 +1,16 @@
 module GoJS.GraphObject.Methods where
 
+import Prelude
+
 import Data.Unit (Unit)
+import Data.Variant (Variant, case_, on)
 import Effect (Effect)
 import GoJS.Diagram.Types (AnimationTrigger_)
+import GoJS.Geometry.Types (Point_, Rect_, Spot_)
 import GoJS.GraphObject.Types (class IsGraphObject, class IsPanel)
-import GoJS.Geometry.Types (Point_, Rect_)
 import GoJS.Model.Types (Binding_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)
+import Type.Prelude (Proxy(..))
 
 bind_ :: forall g. IsGraphObject g => Binding_ -> g -> Effect Unit
 bind_ = callUnsafe1 "bind"
@@ -20,15 +24,22 @@ findBindingPanel_ = callUnsafe0 "findBindingPanel"
 getDocumentAngle_ :: forall g. IsGraphObject g => g -> Effect Number
 getDocumentAngle_ = callUnsafe0 "getDocumentAngle"
 
+-- Optional parameters: result: rect
 getDocumentBounds_ :: forall g. IsGraphObject g => Rect_ -> g -> Effect Rect_
 getDocumentBounds_ = callUnsafe1 "getDocumentBounds"
 
-getDocumentPoint_ :: forall g. IsGraphObject g => Point_ -> g -> Effect Point_
-getDocumentPoint_ = callUnsafe1 "getDocumentPoint"
+-- Optional parameters: result: point
+getDocumentPoint_ :: forall g. IsGraphObject g => Variant (point :: Point_, spot :: Spot_) -> Point_ -> g -> Effect Point_
+getDocumentPoint_ local result g =  local #
+  ( case_
+      # on (Proxy @"point") (\point -> callUnsafe2 "getDocumentPoint" point result g)
+      # on (Proxy @"spot") (\spot -> callUnsafe2 "getDocumentPoint" spot result g)
+  )
 
 getDocumentScale_ :: forall g. IsGraphObject g => g -> Effect Number
 getDocumentScale_ = callUnsafe0 "getDocumentScale"
 
+-- Optional parameters: result: point
 getLocalPoint_ :: forall g. IsGraphObject g => Point_ -> Point_ -> g -> Effect Point_
 getLocalPoint_ = callUnsafe2 "getLocalPoint"
 
