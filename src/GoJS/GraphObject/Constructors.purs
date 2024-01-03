@@ -1,7 +1,7 @@
 module GoJS.GraphObject.Constructors where
 
 import Effect (Effect)
-import GoJS.Diagram.Types (Adornment_, Button_, Group_, Link_, Node_, Panel_, Part_, Picture_, Placeholder_, Shape_, TextBlock_)
+import GoJS.GraphObject.Types (Shape_, Placeholder_, TextBlock_, Picture_, Panel_, Part_, Node_, Group_, Link_, Adornment_, Button_)
 import GoJS.Unsafe (constructor0, constructor1)
 
 newShape :: String -> Effect Shape_

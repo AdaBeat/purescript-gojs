@@ -1,9 +1,9 @@
 module GoJS.Tool.ToolManager.Properties where
 
 import GoJS.Collection (List_)
-import GoJS.Diagram.Types (Adornment_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Size_)
+import GoJS.GraphObject.Types (Adornment_)
 import GoJS.Tool.Types (class IsTool, ActionTool_, ClickCreatingTool_, ClickSelectingTool_, ContextMenuTool_, DragSelectingTool_, DraggingTool_, LinkReshapingTool_, LinkingTool_, PanningTool_, RelinkingTool_, ResizingTool_, RotatingTool_, TextEditingTool_, ToolManager_)
 import GoJS.Unsafe (getUnsafe)
 

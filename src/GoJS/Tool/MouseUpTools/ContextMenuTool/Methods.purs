@@ -5,8 +5,8 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import Effect (Effect)
-import GoJS.Diagram (class IsGraphObject, Adornment_)
 import GoJS.Geometry.Types (Point_)
+import GoJS.GraphObject.Types (class IsGraphObject, Adornment_)
 import GoJS.Tool.Types (ContextMenuTool_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)
 

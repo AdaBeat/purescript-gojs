@@ -1,7 +1,8 @@
 module GoJS.Diagram.Layer.Properties where
 
 import GoJS.Collection (Iterator_)
-import GoJS.Diagram (class IsDiagram, Layer_, SomePart_)
+import GoJS.Diagram.Types (class IsDiagram, Layer_)
+import GoJS.GraphObject.Types (SomePart_)
 import GoJS.Unsafe (getUnsafe)
 
 _allowCopy :: Layer_ -> Boolean

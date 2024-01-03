@@ -3,7 +3,7 @@ module GoJS.Tool.MouseDownTools.RelinkingTool.Methods where
 import Prelude
 
 import Effect (Effect)
-import GoJS.Diagram (class IsGraphObject, class IsNode, class IsPart, Link_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Link_)
 import GoJS.Tool.Types (LinkReshapingTool_)
 import GoJS.Unsafe (callUnsafe4, callUnsafe1, callUnsafe2)
 

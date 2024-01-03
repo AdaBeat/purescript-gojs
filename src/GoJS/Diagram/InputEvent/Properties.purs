@@ -5,7 +5,8 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.Geometry.Types (Point_)
-import GoJS.Diagram.Types (class IsDiagram, class IsGraphObject, InputEvent_)
+import GoJS.Diagram.Types (class IsDiagram, InputEvent_)
+import GoJS.GraphObject.Types (class IsGraphObject)
 import GoJS.Unsafe (getUnsafe)
 
 _alt :: forall d. IsDiagram d => InputEvent_ d -> Boolean

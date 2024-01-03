@@ -7,7 +7,7 @@ import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import Effect (Effect)
 import GoJS.Collection (Iterator_, List_, Set_)
-import GoJS.Diagram.Types (class IsNode, Link_, SomePart_)
+import GoJS.GraphObject.Types (class IsNode, Link_, SomePart_)
 import GoJS.Layout.Types (class LayoutNetwork)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe3)
 

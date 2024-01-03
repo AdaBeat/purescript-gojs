@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.Collection (Iterator_)
-import GoJS.Diagram.Types (class IsGraphObject, class IsPart, Adornment_, Group_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, Group_)
 import GoJS.Geometry.Types (Point_, Size_, Spot_)
 import GoJS.Unsafe (getUnsafe)
 

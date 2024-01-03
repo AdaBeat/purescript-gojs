@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
-import GoJS.Diagram.Types (class IsGraphObject, Adornment_)
+import GoJS.GraphObject.Types (class IsGraphObject, Adornment_)
 import GoJS.Tool.Types (class IsTool, ToolManager_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)
 

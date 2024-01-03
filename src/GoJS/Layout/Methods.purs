@@ -4,7 +4,8 @@ import Prelude
 
 import Effect (Effect)
 import GoJS.Collection (Set_)
-import GoJS.Diagram.Types (class IsDiagram, class IsPart)
+import GoJS.Diagram.Types (class IsDiagram)
+import GoJS.GraphObject.Types (class IsPart)
 import GoJS.Geometry.Types (Point_, Rect_)
 import GoJS.Layout.Types (class IsLayout, class LayoutNetwork)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)

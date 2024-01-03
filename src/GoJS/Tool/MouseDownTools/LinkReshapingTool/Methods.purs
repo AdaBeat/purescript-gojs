@@ -3,9 +3,9 @@ module GoJS.Tool.MouseDownTools.LinkReshapingTool.Methods where
 import Prelude
 
 import Effect (Effect)
-import GoJS.Diagram (class IsGraphObject)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Point_)
+import GoJS.GraphObject.Types (class IsGraphObject)
 import GoJS.Tool.Types (LinkReshapingTool_)
 import GoJS.Unsafe (callUnsafe1, callUnsafe2)
 

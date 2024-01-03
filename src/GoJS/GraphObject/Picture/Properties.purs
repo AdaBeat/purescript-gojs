@@ -1,6 +1,6 @@
 module GoJS.GraphObject.Picture.Properties where
 
-import GoJS.Diagram.Types (Picture_)
+import GoJS.GraphObject.Types (Picture_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Rect_, Spot_)
 import GoJS.Unsafe (getUnsafe)

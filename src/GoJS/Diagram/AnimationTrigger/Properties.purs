@@ -1,8 +1,7 @@
 module GoJS.Diagram.AnimationTrigger.Properties where
 
 import Data.Nullable (Nullable)
-import GoJS.Diagram (EasingFunction)
-import GoJS.Diagram.Types (AnimationTrigger_)
+import GoJS.Diagram.Types (AnimationTrigger_, EasingFunction)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Unsafe (getUnsafe)
 

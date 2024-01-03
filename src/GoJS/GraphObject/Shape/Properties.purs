@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.Diagram.Types (class IsGraphObject, Shape_)
+import GoJS.GraphObject.Types (class IsGraphObject, Shape_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Geometry_, Rect_, Spot_)
 import GoJS.Unsafe (getUnsafe)

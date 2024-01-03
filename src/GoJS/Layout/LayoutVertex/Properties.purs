@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.Collection (Iterator_)
-import GoJS.Diagram (class IsNode)
+import GoJS.GraphObject.Types (class IsNode)
 import GoJS.Layout (class LayoutNetwork)
 import GoJS.Unsafe (getUnsafe)
 

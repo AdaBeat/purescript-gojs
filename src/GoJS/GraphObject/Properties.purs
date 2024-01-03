@@ -3,7 +3,8 @@ module GoJS.GraphObject.Properties where
 import Prelude
 
 import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
-import GoJS.Diagram.Types (class IsGraphObject, class IsPart, Adornment_, Diagram_, Panel_)
+import GoJS.Diagram.Types (Diagram_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, Panel_)
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.EnumValue (EnumValue_)

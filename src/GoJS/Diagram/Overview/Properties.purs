@@ -4,7 +4,8 @@ import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.Diagram.Types (class IsDiagram, class IsPart, Overview_)
+import GoJS.Diagram.Types (class IsDiagram, Overview_)
+import GoJS.GraphObject.Types (class IsPart)
 import GoJS.Unsafe (getUnsafe)
 
 _box :: forall @p. IsPart p => Overview_-> p

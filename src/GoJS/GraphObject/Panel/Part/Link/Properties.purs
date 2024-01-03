@@ -6,7 +6,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.Collection (Iterator_)
-import GoJS.Diagram.Types (class IsGraphObject, class IsNode, Link_, Shape_, SomeNode_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, Link_, Shape_, SomeNode_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Geometry_, Point_, Rect_)
 import GoJS.Unsafe (getUnsafe)

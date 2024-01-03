@@ -1,8 +1,7 @@
 module GoJS.Diagram.AnimationManager.Properties where
 
 import GoJS.Collection (Set_)
-import GoJS.Diagram (Animation_)
-import GoJS.Diagram.Types (AnimationManager_)
+import GoJS.Diagram.Types (Animation_, AnimationManager_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Unsafe (getUnsafe)
 

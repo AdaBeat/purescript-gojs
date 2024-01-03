@@ -1,7 +1,8 @@
 module GoJS.Diagram.CommandHandler.Properties where
 
 import Data.Function.Uncurried (Fn2)
-import GoJS.Diagram (Diagram_, Group_, SomePart_)
+import GoJS.Diagram.Types (Diagram_)
+import GoJS.GraphObject.Types (Group_, SomePart_)
 import GoJS.Diagram.CommandHandler.Types (CommandHandler_)
 import GoJS.Unsafe (getUnsafe)
 

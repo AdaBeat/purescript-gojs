@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.Diagram.Types (Link_)
+import GoJS.GraphObject.Types (Link_)
 import GoJS.Layout (class LayoutNetwork)
 import GoJS.Unsafe (getUnsafe)
 

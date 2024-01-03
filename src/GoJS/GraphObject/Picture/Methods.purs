@@ -3,7 +3,7 @@ module GoJS.GraphObject.Picture.Methods where
 import Prelude
 
 import Effect (Effect)
-import GoJS.Diagram.Types (Picture_)
+import GoJS.GraphObject.Types (Picture_)
 import GoJS.Unsafe (callUnsafe0)
 
 redraw_ :: Picture_ -> Effect Unit

@@ -5,7 +5,7 @@ import Prelude
 import Effect (Effect)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Geometry_, Point_, Spot_)
-import GoJS.Diagram.Types (class IsGraphObject, class IsNode, Link_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, Link_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe4, callUnsafe6, callUnsafe8)
 
 addPoint_ :: Point_ -> Link_ -> Effect Unit

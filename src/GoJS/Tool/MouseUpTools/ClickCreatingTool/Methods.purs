@@ -1,7 +1,7 @@
 module GoJS.Tool.MouseUpTools.ClickCreatingTool.Methods where
 
 import Effect (Effect)
-import GoJS.Diagram (class IsPart)
+import GoJS.GraphObject.Types (class IsPart)
 import GoJS.Tool.Types (ClickCreatingTool_)
 import GoJS.Unsafe (callUnsafe1)
 

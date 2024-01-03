@@ -2,8 +2,8 @@ module GoJS.GraphObject.Methods where
 
 import Data.Unit (Unit)
 import Effect (Effect)
-import GoJS.Diagram (AnimationTrigger_)
-import GoJS.Diagram.Types (class IsGraphObject, class IsPanel)
+import GoJS.Diagram.Types (AnimationTrigger_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPanel)
 import GoJS.Geometry.Types (Point_, Rect_)
 import GoJS.Model.Types (Binding_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)

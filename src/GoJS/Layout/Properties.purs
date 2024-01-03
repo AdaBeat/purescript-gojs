@@ -4,7 +4,8 @@ import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.Diagram.Types (Diagram_, Group_)
+import GoJS.Diagram.Types (Diagram_)
+import GoJS.GraphObject.Types (Group_)
 import GoJS.Geometry.Types (Point_)
 import GoJS.Layout.Types (class IsLayout, class LayoutNetwork)
 import GoJS.Unsafe (getUnsafe)

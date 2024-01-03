@@ -3,7 +3,7 @@ module GoJS.GraphObject.TextBlock.Methods where
 import Prelude
 
 import Effect (Effect)
-import GoJS.Diagram.Types (TextBlock_)
+import GoJS.GraphObject.Types (TextBlock_)
 import GoJS.Unsafe (callStatic0, callStatic1)
 
 getBaseline_ :: Effect (TextBlock_ -> Number -> Number)

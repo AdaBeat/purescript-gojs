@@ -1,6 +1,6 @@
 module GoJS.Model.ChangedEvent.Properties where
 
-import GoJS.Diagram (class IsDiagram)
+import GoJS.Diagram.Types (class IsDiagram)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Model.Types (class IsModel, ChangedEvent_)
 import GoJS.Unsafe (getUnsafe)

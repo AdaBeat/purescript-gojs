@@ -1,6 +1,6 @@
 module GoJS.Diagram.DraggingOptions.Properties where
 
-import GoJS.Diagram (DraggingOptions_)
+import GoJS.Diagram.Types (DraggingOptions_)
 import GoJS.Geometry.Types (Point_, Size_, Spot_)
 import GoJS.Unsafe (getUnsafe)
 

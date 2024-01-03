@@ -6,7 +6,7 @@ import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import Effect (Effect)
 import GoJS.Geometry.Types (Point_, Rect_)
-import GoJS.Diagram.Types (class IsPart, Adornment_, Group_)
+import GoJS.GraphObject.Types (class IsPart, Adornment_, Group_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe3)
 
 addAdornment_ :: forall p. IsPart p => String -> Adornment_ -> p -> Effect Unit

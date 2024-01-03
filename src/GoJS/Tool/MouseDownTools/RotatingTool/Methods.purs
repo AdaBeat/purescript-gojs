@@ -3,7 +3,7 @@ module GoJS.Tool.MouseDownTools.RotatingTool.Methods where
 import Prelude
 
 import Effect (Effect)
-import GoJS.Diagram (class IsGraphObject)
+import GoJS.GraphObject.Types (class IsGraphObject)
 import GoJS.Geometry.Types (Point_)
 import GoJS.Tool.Types (RotatingTool_)
 import GoJS.Unsafe (callUnsafe1)

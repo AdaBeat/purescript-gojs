@@ -4,8 +4,7 @@ import Prelude
 
 import Effect (Effect)
 import GoJS.Collection (Iterator_, Set_)
-import GoJS.Diagram (Group_, SomeNode_)
-import GoJS.Diagram.Types (class IsNode, class IsPart, Link_)
+import GoJS.GraphObject.Types (class IsNode, class IsPart, Group_, Link_, SomeNode_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1)
 
 addMembers_ :: forall p. IsPart p => Iterator_ p -> Group_ -> Effect Boolean

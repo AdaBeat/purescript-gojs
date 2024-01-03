@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import Effect (Effect)
-import GoJS.Diagram.Types (Group_, Placeholder_, SomePart_)
+import GoJS.GraphObject.Types (Group_, Placeholder_, SomePart_)
 import GoJS.Layout.Types (class IsLayout)
 import GoJS.Unsafe (getUnsafe)
 

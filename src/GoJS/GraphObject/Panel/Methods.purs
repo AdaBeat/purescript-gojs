@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import Effect (Effect)
-import GoJS.Diagram.Types (class IsGraphObject, class IsPanel)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPanel)
 import GoJS.Geometry.Types (Point_)
 import GoJS.RowColumnDefinition.Types (RowColumnDefinition_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)

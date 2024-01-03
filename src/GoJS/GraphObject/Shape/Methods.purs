@@ -5,7 +5,7 @@ import Prelude
 import Data.Function.Uncurried (Fn3)
 import Effect (Effect)
 import GoJS.Geometry.Types (Geometry_)
-import GoJS.Diagram.Types (Shape_)
+import GoJS.GraphObject.Types (Shape_)
 import GoJS.Unsafe (callStatic2) 
 
 defineArrowheadGeometry_ :: String -> Geometry_ -> Effect Unit

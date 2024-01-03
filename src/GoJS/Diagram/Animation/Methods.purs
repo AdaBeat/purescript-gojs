@@ -4,7 +4,8 @@ import Prelude
 
 import Data.Variant (Variant, case_, on)
 import Effect (Effect)
-import GoJS.Diagram (class IsDiagram, class IsGraphObject, class IsPart, Animation_)
+import GoJS.Diagram.Types (Animation_, class IsDiagram)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPart)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe5)
 import Type.Prelude (Proxy(..))
 

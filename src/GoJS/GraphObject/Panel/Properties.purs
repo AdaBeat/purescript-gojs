@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.Collection (Iterator_)
-import GoJS.Diagram.Types (class IsPanel, SomeGraphObject_)
+import GoJS.GraphObject.Types (class IsPanel, SomeGraphObject_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Margin_, Point_, Size_, Spot_)
 import GoJS.Unsafe (getUnsafe)

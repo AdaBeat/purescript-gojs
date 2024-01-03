@@ -1,6 +1,6 @@
 module GoJS.GraphObject.TextBlock.Properties where
 
-import GoJS.Diagram.Types (TextBlock_)
+import GoJS.GraphObject.Types (TextBlock_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Spot_)
 import GoJS.Unsafe (getUnsafe)

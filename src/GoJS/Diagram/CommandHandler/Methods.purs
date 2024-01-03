@@ -4,9 +4,9 @@ import Prelude
 
 import Effect (Effect)
 import GoJS.Collection (Iterator_, Map_, Set_)
-import GoJS.Diagram (DraggingInfo_, DraggingOptions_)
 import GoJS.Diagram.CommandHandler.Types (CommandHandler_)
-import GoJS.Diagram.Types (class IsGraphObject, class IsNode, class IsPart, Group_, SomePart_, TextBlock_)
+import GoJS.Diagram.Types (DraggingInfo_, DraggingOptions_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Group_, SomePart_, TextBlock_)
 import GoJS.Geometry.Types (Point_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)
 
