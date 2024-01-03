@@ -15,6 +15,7 @@ _easing = getUnsafe [ "easing" ]
 _finished :: Animation_ -> (EffectFn1 Animation_ Unit)
 _finished = getUnsafe [ "finished" ]
 
+-- Read-only
 _isAnimating :: Animation_ -> Boolean
 _isAnimating = getUnsafe [ "isAnimating" ]
 
