@@ -8,12 +8,12 @@ import GoJS.Collection (Iterator_, Map_, Set_)
 import GoJS.Diagram.CommandHandler.Types (CommandHandler_)
 import GoJS.Diagram.Types (class IsDiagram, DraggingInfo_, DraggingOptions_)
 import GoJS.Geometry.Types (Point_)
-import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Group_, SomePart_, TextBlock_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Group_, Part_, TextBlock_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)
 import Type.Prelude (Proxy(..))
 
 -- Optional parameters: check: boolean
-addTopLevelParts_ :: Iterator_ SomePart_ -> Boolean -> CommandHandler_ -> Effect Boolean
+addTopLevelParts_ :: Iterator_ Part_ -> Boolean -> CommandHandler_ -> Effect Boolean
 addTopLevelParts_ = callUnsafe2 "addTopLevelParts"
 
 -- Optional parameters: group: Group
@@ -104,13 +104,13 @@ collapseTree_ :: forall n. IsNode n => n -> CommandHandler_ -> Effect Unit
 collapseTree_ = callUnsafe1 "collapseTree"
 
 -- Optional parameters: options: DraggingOptions
-computeEffectiveCollection_ :: Iterator_ SomePart_ -> DraggingOptions_ -> CommandHandler_ -> Effect (Map_ SomePart_ DraggingInfo_)
+computeEffectiveCollection_ :: Iterator_ Part_ -> DraggingOptions_ -> CommandHandler_ -> Effect (Map_ Part_ DraggingInfo_)
 computeEffectiveCollection_ = callUnsafe2 "computeEffectiveCollection"
 
 copySelection_ :: CommandHandler_ -> Effect Unit
 copySelection_ = callUnsafe0 "copySelection"
 
-copyToClipboard_ :: Iterator_ SomePart_ -> CommandHandler_ -> Effect Unit
+copyToClipboard_ :: Iterator_ Part_ -> CommandHandler_ -> Effect Unit
 copyToClipboard_ = callUnsafe1 "copyToClipboard"
 
 cutSelection_ :: CommandHandler_ -> Effect Unit

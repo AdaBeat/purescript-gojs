@@ -6,7 +6,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.Collection (Iterator_)
-import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, Link_, Shape_, SomeNode_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, Link_, Shape_, Node_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Geometry_, Point_, Rect_)
 import GoJS.Unsafe (getUnsafe)
@@ -44,7 +44,7 @@ _isOrthogonal = getUnsafe [ "isOrthogonal" ]
 _isTreeLink :: Link_ -> Boolean
 _isTreeLink = getUnsafe [ "isTreeLink" ]
 
-_labelNodes :: Link_ -> Iterator_ SomeNode_
+_labelNodes :: Link_ -> Iterator_ Node_
 _labelNodes = getUnsafe [ "labelNodes" ]
 
 _midAngle :: Link_ -> Number

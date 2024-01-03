@@ -11,7 +11,7 @@ import GoJS.Collection (Iterator_, List_, Map_)
 import GoJS.Diagram.Types (class IsDiagram, DiagramEvent_, DraggingOptions_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Point_, Rect_, Spot_)
-import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Group_, Link_, SomeGraphObject_, SomeNode_, SomePart_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Group_, Link_, SomeGraphObject_, Node_, Part_)
 import GoJS.Model (ChangedEvent_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe3, callUnsafe4)
 import Type.Prelude (Proxy(..))
@@ -61,7 +61,7 @@ computeBounds_ :: forall d. IsDiagram d => Rect_ -> d -> Effect Rect_
 computeBounds_ = callUnsafe1 "computeBounds"
 
 -- Optional parameters: includeLinks: boolean
-computePartsBounds_ :: forall d. IsDiagram d => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> Boolean -> d -> Effect Rect_
+computePartsBounds_ :: forall d. IsDiagram d => Variant (array :: Array Part_, iterator :: Iterator_ Part_) -> Boolean -> d -> Effect Rect_
 computePartsBounds_ coll includeLinks diagram = coll #
   ( case_
       # on (Proxy @"array") (\array -> callUnsafe2 "computePartsBounds" array includeLinks diagram)
@@ -70,7 +70,7 @@ computePartsBounds_ coll includeLinks diagram = coll #
 
 -- Optional parameters: check: boolean
 -- TODO: This existential-key Map is a bit of a pain.
-copyParts_ :: forall d. IsDiagram d => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> Boolean -> d -> Effect (Map_ SomePart_ SomePart_)
+copyParts_ :: forall d. IsDiagram d => Variant (array :: Array Part_, iterator :: Iterator_ Part_) -> Boolean -> d -> Effect (Map_ Part_ Part_)
 copyParts_ coll check diagram = coll #
   ( case_
       # on (Proxy @"array") (\array -> callUnsafe2 "copyParts" array check diagram)
@@ -98,7 +98,7 @@ findNodeForData_ d di = toMaybe <$> callUnsafe1 "findNodeForData" d di
 findNodeForKey_ :: forall d @n k. IsDiagram d => IsNode n => k -> d -> Effect (Maybe n)
 findNodeForKey_ k d = toMaybe <$> callUnsafe1 "findNodeForKey" k d
 
-findNodesByExample_ :: forall r d. IsDiagram d => Array (Record r) -> d -> Effect (Iterator_ SomeNode_)
+findNodesByExample_ :: forall r d. IsDiagram d => Array (Record r) -> d -> Effect (Iterator_ Node_)
 findNodesByExample_ = callUnsafe1 "findNodesByExample"
 
 -- Optional parameters excluded: navig: a: GraphObject => T where T: GraphObject<T>
@@ -132,23 +132,23 @@ findPartForKey_ k d = toMaybe <$> callUnsafe1 "findPartForKey" k d
 
 -- Optional parameters: selectable: boolean
 -- Optional parameters excluded: coll: S where S can be a Set or List of parts.
-findPartsAt_ :: forall d. IsDiagram d => Point_ -> Boolean -> d -> Effect (List_ SomePart_)
+findPartsAt_ :: forall d. IsDiagram d => Point_ -> Boolean -> d -> Effect (List_ Part_)
 findPartsAt_ = callUnsafe2 "findPartsAt"
 
 -- Optional parameters: selectable: boolean, partialInclusion: boolean
 -- Optional parameters excluded: coll: S where S can be a Set or List of parts.
-findPartsIn_ :: forall d. IsDiagram d => Rect_ -> Boolean -> Boolean -> d -> Effect (List_ SomePart_)
+findPartsIn_ :: forall d. IsDiagram d => Rect_ -> Boolean -> Boolean -> d -> Effect (List_ Part_)
 findPartsIn_ = callUnsafe3 "findPartsIn"
 
 -- Optional parameters: selectable: boolean, partialInclusion: boolean
 -- Optional parameters excluded: coll: S where S can be a Set or List of parts.
-findPartsNear_ :: forall d. IsDiagram d => Rect_ -> Boolean -> Boolean -> d -> Effect (List_ SomePart_)
+findPartsNear_ :: forall d. IsDiagram d => Rect_ -> Boolean -> Boolean -> d -> Effect (List_ Part_)
 findPartsNear_ = callUnsafe3 "findPartsNear"
 
 findTopLevelGroups_ :: forall d. IsDiagram d => IsDiagram d => d -> Effect (Iterator_ Group_)
 findTopLevelGroups_ = callUnsafe0 "findTopLevelGroups"
 
-findTreeRoots_ :: forall d. IsDiagram d => d -> Effect (Iterator_ SomeNode_)
+findTreeRoots_ :: forall d. IsDiagram d => d -> Effect (Iterator_ Node_)
 findTreeRoots_ = callUnsafe0 "findTreeRoots"
 
 focus_ :: forall d. IsDiagram d => IsDiagram d => d -> Effect Unit
@@ -157,7 +157,7 @@ focus_ = callUnsafe0 "focus"
 highlight_ :: forall d p. IsDiagram d => IsPart p => p -> d -> Effect Unit
 highlight_ = callUnsafe1 "highlight"
 
-highlightCollection_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> d -> Effect Unit
+highlightCollection_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array Part_, iterator :: Iterator_ Part_) -> d -> Effect Unit
 highlightCollection_ coll diagram = coll #
   ( case_
       # on (Proxy @"array") (\array -> callUnsafe1 "highlightCollection" array diagram)
@@ -183,7 +183,7 @@ makeImage_ = callUnsafe0 "makeImage"
 -- makeSvg_ = callUnsafe0 "makeSvg"
 
 -- Optional parameters: check: boolean, dragOptions: DraggingOptions
-moveParts_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> Point_ -> Boolean -> DraggingOptions_ -> d -> Effect Unit
+moveParts_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array Part_, iterator :: Iterator_ Part_) -> Point_ -> Boolean -> DraggingOptions_ -> d -> Effect Unit
 moveParts_ coll offset check draggingOptions diagram = coll #
   ( case_
       # on (Proxy @"array") (\array -> callUnsafe4 "moveParts" array offset check draggingOptions diagram)
@@ -215,7 +215,7 @@ removeModelChangedListener_ :: forall d. IsDiagram d => String -> (Fn1 ChangedEv
 removeModelChangedListener_ name listener d = callUnsafe2 "removeModelChangedListener" name listener d
 
 -- Optional parameters: check: boolean
-removeParts_ :: forall d. IsDiagram d => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> Boolean -> d -> Effect Unit
+removeParts_ :: forall d. IsDiagram d => Variant (array :: Array Part_, iterator :: Iterator_ Part_) -> Boolean -> d -> Effect Unit
 removeParts_ coll check diagram = coll #
   ( case_
       # on (Proxy @"array") (\array -> callUnsafe2 "removeParts" array check diagram)
@@ -240,7 +240,7 @@ scrollToRect_ = callUnsafe1 "scrollToRect"
 select_ :: forall d p. IsDiagram d => IsPart p => p -> d -> Effect Unit
 select_ = callUnsafe1 "select"
 
-selectCollection_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> d -> Effect Unit
+selectCollection_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array Part_, iterator :: Iterator_ Part_) -> d -> Effect Unit
 selectCollection_ coll diagram = coll #
   ( case_
       # on (Proxy @"array") (\array -> callUnsafe1 "selectCollection" array diagram)

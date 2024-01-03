@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import Effect (Effect)
-import GoJS.GraphObject.Types (Group_, Placeholder_, SomePart_)
+import GoJS.GraphObject.Types (Group_, Placeholder_, Part_)
 import GoJS.Layout.Types (class IsLayout)
 import GoJS.Unsafe (getUnsafe)
 
@@ -27,10 +27,10 @@ _isSubGraphExpanded = getUnsafe [ "isSubGraphExpanded" ]
 _layout :: forall @l. IsLayout l => Group_ -> l
 _layout = getUnsafe [ "layout" ]
 
-_memberAdded :: Group_ -> (Group_ -> SomePart_ -> Effect Unit)
+_memberAdded :: Group_ -> (Group_ -> Part_ -> Effect Unit)
 _memberAdded = getUnsafe [ "memberAdded" ]
 
-_memberRemoved :: Group_ -> (Group_ -> SomePart_ -> Effect Unit)
+_memberRemoved :: Group_ -> (Group_ -> Part_ -> Effect Unit)
 _memberRemoved = getUnsafe [ "memberRemoved" ]
 
 _placeholder :: Group_ -> Maybe Placeholder_

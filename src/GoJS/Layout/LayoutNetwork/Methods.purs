@@ -7,14 +7,14 @@ import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import Effect (Effect)
 import GoJS.Collection (Iterator_, List_, Set_)
-import GoJS.GraphObject.Types (class IsNode, Link_, SomePart_)
+import GoJS.GraphObject.Types (class IsNode, Link_, Part_)
 import GoJS.Layout.Types (class LayoutNetwork)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe3)
 
 addEdge_ :: forall _l n e _v. LayoutNetwork _l n e _v => e -> n -> Effect Unit
 addEdge_ = callUnsafe1 "addEdge"
 
-addParts_ :: forall _l n _e _v. LayoutNetwork _l n _e _v => Iterator_ SomePart_ -> Boolean -> (Fn1 SomePart_ Boolean) -> n -> Effect Unit
+addParts_ :: forall _l n _e _v. LayoutNetwork _l n _e _v => Iterator_ Part_ -> Boolean -> (Fn1 Part_ Boolean) -> n -> Effect Unit
 addParts_ = callUnsafe3 "addParts"
 
 addLink_ :: forall _l n e _v. LayoutNetwork _l n e _v => Link_ -> n -> Effect e
@@ -50,7 +50,7 @@ deleteSelfEdges_ = callUnsafe0 "deleteSelfEdges"
 deleteVertex_ :: forall _l n _e v. LayoutNetwork _l n _e v => v -> n -> Effect Unit
 deleteVertex_ = callUnsafe1 "deleteVertex"
 
-findAllParts_ :: forall _l n _e _v. LayoutNetwork _l n _e _v => n -> Effect (Set_ SomePart_)
+findAllParts_ :: forall _l n _e _v. LayoutNetwork _l n _e _v => n -> Effect (Set_ Part_)
 findAllParts_ = callUnsafe0 "findAllParts"
 
 findEdge_ :: forall _l n e _v. LayoutNetwork _l n e _v => Link_ -> n -> Effect (Maybe e)

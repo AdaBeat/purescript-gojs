@@ -20,11 +20,41 @@ GraphObject -┼---- Picture                ┌---- Adornment
              ├---- Placeholder            ├---- Link
              └---- Panel -------- Part ---┴---- Node ------ Group 
 ```
-In this library, this is modeled with methodless typeclasses `IsGraphObject`, `IsPanel` etc. `GraphObject` being an abstract class simply means it doesn't have a corresponding opaque foreign type `GraphObject_`, unlike `Shape_`, `Panel_` and `Part_` etc.
+In this library, this is modeled with typeclasses `IsGraphObject`, `IsPanel` etc. `GraphObject` being an abstract class simply means it doesn't have a corresponding opaque foreign type `GraphObject_`, unlike `Shape_`, `Panel_` and `Part_` etc.
 
 ### Return types
-1. **Collections**: Some methods in GoJS return collections of `GraphObject`s. Since collections in PureScript are almost always homogeneous, the closest model to this in PureScript is something like a list of existential types `SomeGraphObject_` - we can call any method that accepts a type implementing the `IsGraphObject` typeclass on such elements, but nothing more specific in the context of the list. The alternative is to have the returned collections be of a type determined by the caller.
-2. **Polymorphic return types**: Many methods return classes. In this case we do allow the caller to determine the output, by having the output type as a visible type variable. This is often needed if the output of such a function is not called by a function accepting a concrete type (and instead accepts any argument implementing a child class), which would disambiguate the type. For example, consider the following code:
+#### Collections
+Some methods in GoJS return collections of `GraphObject`s. One can have an array that looks like this, for instance:
+```typescript
+myArr: Part[] = [new Part(), new Node(), new Group()]
+```
+Collections in PureScript are almost always homogeneous, which means every element of the collection has to be of the same type. There's several ways to encode this in PureScript:
+1. An array of a sum type:
+```purescript
+data ConcretePart_
+  = ConcretePart Part_
+  | ConcreteNode Node_
+  | ConcreteGroup Group
+  -- ... link, adornment
+myArr :: Array Part_
+myArr = [ConcretePart part, ConcreteNode node, ConcreteGroup group]
+```
+2. An array of an existential type:
+```purescript
+newtype SomePart_ = SomePart_ (forall p. IsPart p => p)
+myArr :: Array SomePart_
+myArr = [SomePart_ part, SomePart_ node, SomePart_ group]
+```
+3. An array of plain `Part_`s (so we consider every element of the array to be just the concrete opaque `Part_` type, even some of them might be `Node_`s).
+
+Each of these approaches has significant drawbacks:
+1. The problem with a sum type is that, in order to convert the collection from JavaScript to the PureScript sum type, the entire collection needs to be traversed *at the javascript level*, and have its elements wrapped *there* with a PureScript value constructor, after a call to `instanceof`. This may be inefficient and could interfere with any lazy semantics that GoJS might have.
+2. The problem with existential types is that it's impossible to call functions from, say, the `Node` class on the wrapped values, because all the compiler knows is that it's a `Part`. This can be worked around with conversion functions whose implementations are just `unsafeCoerce`; this is inherently not type safe, so the calling code should know when it's appropriate. It's also more boilerplate and mental overhead.
+3. The problem with plain `Part_`s (and its analogous versions for `Node_`s, `Panel_`s etc) is that it's the least type-safe. Users of the library can call `fromPart` on any `Part_` to generate what PureScript will *think* is a `Node_` for example, even if it's not in the underlying JS.
+  
+The most principled approach would be the first, but we are going with the third approach for now for convenience reasons.
+
+1. **Polymorphic return types**: Many methods return classes. In this case we do allow the caller to determine the output, by having the output type as a visible type variable. This is often needed if the output of such a function is not called by a function accepting a concrete type (and instead accepts any argument implementing a child class), which would disambiguate the type. For example, consider the following code:
 ```purescript
 myNode <- someLink # _fromNode -- _fromNode :: forall @n. IsNode n => Link_ -> Maybe n
 case myNode of

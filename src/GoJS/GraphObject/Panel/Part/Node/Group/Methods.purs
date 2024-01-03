@@ -4,7 +4,7 @@ import Prelude
 
 import Effect (Effect)
 import GoJS.Collection (Iterator_, Set_)
-import GoJS.GraphObject.Types (class IsNode, class IsPart, Group_, Link_, SomeNode_)
+import GoJS.GraphObject.Types (class IsNode, class IsPart, Group_, Link_, Node_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1)
 
 addMembers_ :: forall p. IsPart p => Iterator_ p -> Group_ -> Effect Boolean
@@ -25,7 +25,7 @@ expandSubGraph_ = callUnsafe0 "expandSubGraph"
 findExternalLinksConnected_ :: Group_ -> Effect (Iterator_ Link_)
 findExternalLinksConnected_ = callUnsafe0 "findExternalLinksConnected"
 
-findExternalNodesConnected_ :: forall n. IsNode n => n -> Group_ -> Effect (Iterator_ SomeNode_)
+findExternalNodesConnected_ :: forall n. IsNode n => n -> Group_ -> Effect (Iterator_ Node_)
 findExternalNodesConnected_ = callUnsafe1 "findExternalNodesConnected"
 
 findSubGraphParts_ :: forall p. IsPart p => Group_ -> Effect (Set_ p)

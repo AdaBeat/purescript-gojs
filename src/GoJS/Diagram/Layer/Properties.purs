@@ -2,7 +2,7 @@ module GoJS.Diagram.Layer.Properties where
 
 import GoJS.Collection (Iterator_)
 import GoJS.Diagram.Types (class IsDiagram, Layer_)
-import GoJS.GraphObject.Types (SomePart_)
+import GoJS.GraphObject.Types (Part_)
 import GoJS.Unsafe (getUnsafe)
 
 _allowCopy :: Layer_ -> Boolean
@@ -56,10 +56,10 @@ _name = getUnsafe [ "name" ]
 _opacity :: Layer_ -> Number
 _opacity = getUnsafe [ "opacity" ]
 
-_parts :: Layer_ -> Iterator_ SomePart_
+_parts :: Layer_ -> Iterator_ Part_
 _parts = getUnsafe [ "parts" ]
 
-_partsBackwards :: Layer_ -> Iterator_ SomePart_
+_partsBackwards :: Layer_ -> Iterator_ Part_
 _partsBackwards = getUnsafe [ "partsBackwards" ]
 
 _pickable :: Layer_ -> Boolean

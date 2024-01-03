@@ -2,7 +2,7 @@ module GoJS.Diagram.CommandHandler.Properties where
 
 import Data.Function.Uncurried (Fn2)
 import GoJS.Diagram.Types (Diagram_)
-import GoJS.GraphObject.Types (Group_, SomePart_)
+import GoJS.GraphObject.Types (Group_, Part_)
 import GoJS.Diagram.CommandHandler.Types (CommandHandler_)
 import GoJS.Unsafe (getUnsafe)
 
@@ -34,7 +34,7 @@ _diagram = getUnsafe ["diagram"]
 _isZoomToFitRestoreEnabled :: CommandHandler_ -> Boolean
 _isZoomToFitRestoreEnabled = getUnsafe ["isZoomToFitRestoreEnabled"]
 
-_memberValidation :: CommandHandler_ -> Fn2 Group_ SomePart_ Boolean
+_memberValidation :: CommandHandler_ -> Fn2 Group_ Part_ Boolean
 _memberValidation = getUnsafe ["memberValidation"]
 
 _zoomFactor :: CommandHandler_ -> Number

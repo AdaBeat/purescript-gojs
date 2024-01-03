@@ -1,5 +1,9 @@
 module GoJS.GraphObject.Types where
 
+import Prelude
+
+import Unsafe.Coerce (unsafeCoerce)
+
 -- | GraphObject types
 foreign import data Shape_ :: Type
 foreign import data Picture_ :: Type
@@ -15,10 +19,6 @@ foreign import data Group_ :: Type
 
 -- | Existential versions of graph objects that are parent classes
 newtype SomeGraphObject_ = SomeGraphObject_ (forall g. IsGraphObject g => g)
-newtype SomePanel_ = SomePanel_ (forall p. IsPanel p => p)
-newtype SomePart_ = SomePart_ (forall p. IsPart p => p)
-newtype SomeNode_ = SomeNode_ (forall n. IsNode n => n)
-
 
 class IsGraphObject (a :: Type)
 
@@ -34,31 +34,39 @@ instance IsGraphObject Group_
 instance IsGraphObject Link_
 instance IsGraphObject Adornment_
 instance IsGraphObject SomeGraphObject_
-instance IsGraphObject SomePanel_
-instance IsGraphObject SomePart_
-instance IsGraphObject SomeNode_
 
-class IsGraphObject a <= IsPanel a
-instance IsPanel Panel_
-instance IsPanel Button_ -- Buttons are really just panels
-instance IsPanel Part_
-instance IsPanel Node_
-instance IsPanel Group_
-instance IsPanel Link_
-instance IsPanel Adornment_
-instance IsPanel SomePanel_
-instance IsPanel SomePart_
-instance IsPanel SomeNode_
+class IsGraphObject a <= IsPanel a where
+  fromPanel :: Panel_ -> a
+instance IsPanel Panel_ where
+  fromPanel = identity
+instance IsPanel Button_ where -- Buttons are really just panels
+  fromPanel = unsafeCoerce
+instance IsPanel Part_ where
+  fromPanel = unsafeCoerce
+instance IsPanel Node_ where
+  fromPanel = unsafeCoerce
+instance IsPanel Group_ where
+  fromPanel = unsafeCoerce
+instance IsPanel Link_ where
+  fromPanel = unsafeCoerce
+instance IsPanel Adornment_ where
+  fromPanel = unsafeCoerce
 
-class IsPanel a <= IsPart a
-instance IsPart Part_
-instance IsPart Node_
-instance IsPart Group_
-instance IsPart Link_
-instance IsPart Adornment_
-instance IsPart SomePart_
-instance IsPart SomeNode_
-class IsPart a <= IsNode a
-instance IsNode Node_
-instance IsNode Group_
-instance IsNode SomeNode_
+class IsPanel a <= IsPart a where
+  fromPart :: Part_ -> a
+instance IsPart Part_ where
+  fromPart = identity
+instance IsPart Node_ where
+  fromPart = unsafeCoerce
+instance IsPart Group_ where
+  fromPart = unsafeCoerce
+instance IsPart Link_ where
+  fromPart = unsafeCoerce
+instance IsPart Adornment_ where
+  fromPart = unsafeCoerce
+class IsPart a <= IsNode a where
+  fromNode :: Node_ -> a
+instance IsNode Node_ where
+  fromNode = identity
+instance IsNode Group_ where
+  fromNode = unsafeCoerce

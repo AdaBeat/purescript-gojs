@@ -9,7 +9,7 @@ import GoJS.Diagram.CommandHandler.Types (CommandHandler_)
 import GoJS.Diagram.Types (class IsDiagram, AnimationManager_, InputEvent_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
-import GoJS.GraphObject.Types (class IsPanel, class IsPart, Adornment_, Group_, Link_, SomeNode_, SomePart_)
+import GoJS.GraphObject.Types (class IsPanel, class IsPart, Adornment_, Group_, Link_, Node_, Part_)
 import GoJS.Layout.Types (class IsLayout)
 import GoJS.Model.Types (class IsModel, UndoManager_)
 import GoJS.Tool.Types (ToolManager_)
@@ -135,7 +135,7 @@ _hasVerticalScrollbar :: forall d. IsDiagram d => d -> Boolean
 _hasVerticalScrollbar = getUnsafe [ "hasVerticalScrollbar" ]
 
 -- Read-only
-_highlighteds :: forall d. IsDiagram d => d -> Set_ SomePart_
+_highlighteds :: forall d. IsDiagram d => d -> Set_ Part_
 _highlighteds = getUnsafe [ "highlighteds" ]
 
 _initialAutoScale :: forall d. IsDiagram d => d -> EnumValue_
@@ -214,7 +214,7 @@ _nodeTemplate :: forall d @p. IsDiagram d => IsPart p => d -> p
 _nodeTemplate = getUnsafe [ "nodeTemplate" ]
 
 -- Read-only
-_nodes :: forall d. IsDiagram d => d -> Iterator_ SomeNode_
+_nodes :: forall d. IsDiagram d => d -> Iterator_ Node_
 _nodes = getUnsafe [ "nodes" ]
 
 _opacity :: forall d. IsDiagram d => d -> Number
@@ -224,7 +224,7 @@ _padding :: forall d. IsDiagram d => d -> Margin_
 _padding = getUnsafe [ "padding" ]
 
 -- Read-only
-_parts :: forall d. IsDiagram d => d -> Iterator_ SomePart_
+_parts :: forall d. IsDiagram d => d -> Iterator_ Part_
 _parts = getUnsafe [ "parts" ]
 
 _position :: forall d. IsDiagram d => d -> Point_
@@ -252,7 +252,7 @@ _scrollsPageOnFocus :: forall d. IsDiagram d => d -> Boolean
 _scrollsPageOnFocus = getUnsafe [ "scrollsPageOnFocus" ]
 
 -- Read-only
-_selection :: forall d. IsDiagram d => d -> Set_ SomePart_
+_selection :: forall d. IsDiagram d => d -> Set_ Part_
 _selection = getUnsafe [ "selection" ]
 
 _skipsUndoManager :: forall d. IsDiagram d => d -> Boolean
