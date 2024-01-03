@@ -5,14 +5,14 @@ package:
       - HidingImport
   name: gojs
   dependencies:
-    - lists
     - console
+    - lists
     - nullable
     - prelude
     - typelevel-prelude
     - variant
+    - web-html
 workspace:
   package_set:
     registry: 47.8.0
   extra_packages: {}
-

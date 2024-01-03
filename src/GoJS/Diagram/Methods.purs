@@ -2,27 +2,24 @@ module GoJS.Diagram.Methods where
 
 import Prelude
 
-import Data.Foldable (class Foldable)
 import Data.Function.Uncurried (Fn1)
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import Data.Symbol (reflectSymbol)
+import Data.Variant (Variant, case_, on)
 import Effect (Effect)
-import GoJS.Class (class ClassName)
-import GoJS.Collection (Iterator_)
-import GoJS.Diagram.Types (class IsDiagram, DiagramEvent_, Layer_)
-import GoJS.GraphObject.Types (class IsNode, class IsPart, Group_, Link_, SomeNode_)
+import GoJS.Collection (Iterator_, List_, Map_)
+import GoJS.Diagram.Types (class IsDiagram, DiagramEvent_, DraggingOptions_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Point_, Rect_, Spot_)
-import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe3, constructor1)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Group_, Link_, SomeGraphObject_, SomeNode_, SomePart_)
+import GoJS.Model (ChangedEvent_)
+import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe3, callUnsafe4)
 import Type.Prelude (Proxy(..))
+import Web.HTML.HTMLImageElement (HTMLImageElement)
 
 foreign import addNodeTemplate_ :: forall d n. String -> n -> d -> Effect Unit
 foreign import addLinkTemplate_ :: forall d l. String -> l -> d -> Effect Unit
 foreign import addGroupTemplate_ :: forall d g. String -> g -> d -> Effect Unit
-
-newDiagram :: forall (@s :: Symbol) (d :: Type). ClassName d s => IsDiagram d => String -> Effect d
-newDiagram = constructor1 (reflectSymbol (Proxy @s))
 
 add_ :: forall d p. IsDiagram d => IsPart p => p -> d -> Effect Unit
 add_ = callUnsafe1 "add"
@@ -63,8 +60,22 @@ commitTransaction_ = callUnsafe1 "commitTransaction"
 computeBounds_ :: forall d. IsDiagram d => Rect_ -> d -> Effect Rect_
 computeBounds_ = callUnsafe1 "computeBounds"
 
-computePartsBounds_ :: forall d p. IsDiagram d => IsPart p => Array p -> Boolean -> d -> Effect Rect_
-computePartsBounds_ = callUnsafe2 "computePartsBounds"
+-- Optional parameters: includeLinks: boolean
+computePartsBounds_ :: forall d. IsDiagram d => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> Boolean -> d -> Effect Rect_
+computePartsBounds_ coll includeLinks diagram = coll #
+  ( case_
+      # on (Proxy @"array") (\array -> callUnsafe2 "computePartsBounds" array includeLinks diagram)
+      # on (Proxy @"iterator") (\iterator -> callUnsafe2 "computePartsBounds" iterator includeLinks diagram)
+  )
+
+-- Optional parameters: check: boolean
+-- TODO: This existential-key Map is a bit of a pain.
+copyParts_ :: forall d. IsDiagram d => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> Boolean -> d -> Effect (Map_ SomePart_ SomePart_)
+copyParts_ coll check diagram = coll #
+  ( case_
+      # on (Proxy @"array") (\array -> callUnsafe2 "copyParts" array check diagram)
+      # on (Proxy @"iterator") (\iterator -> callUnsafe2 "copyParts" iterator check diagram)
+  )
 
 ensureBounds_ :: forall d. IsDiagram d => IsDiagram d => d -> Effect Unit
 ensureBounds_ = callUnsafe0 "ensureBounds"
@@ -90,6 +101,26 @@ findNodeForKey_ k d = toMaybe <$> callUnsafe1 "findNodeForKey" k d
 findNodesByExample_ :: forall r d. IsDiagram d => Array (Record r) -> d -> Effect (Iterator_ SomeNode_)
 findNodesByExample_ = callUnsafe1 "findNodesByExample"
 
+-- Optional parameters excluded: navig: a: GraphObject => T where T: GraphObject<T>
+findObjectAt_ :: forall d @g. IsDiagram d => IsGraphObject g => Point_ -> Boolean -> d -> Effect (Maybe g)
+findObjectAt_ p b d = toMaybe <$> callUnsafe2 "findObjectAt" p b d
+
+-- Optional parameters excluded: navig: a: GraphObject => T where T: GraphObject<T>
+-- TODO: Collection can be a Set or a List.
+findObjectsAt_ :: forall d. IsDiagram d => Point_ -> Boolean -> d -> Effect (List_ SomeGraphObject_)
+findObjectsAt_ = callUnsafe2 "findObjectsAt"
+
+-- Optional parameters excluded: navig: a: GraphObject => T, pred: a: T => boolean, partialInclusion: boolean, coll: S
+-- where T: GraphObject<T>. S can be Set or List.
+findObjectsIn_ :: forall d. IsDiagram d => Rect_ -> d -> Effect (List_ SomeGraphObject_)
+findObjectsIn_ = callUnsafe1 "findObjectsIn"
+
+-- Optional parameters excluded: navig: a: GraphObject => T, pred: a: T => boolean, partialInclusion: boolean, coll: S
+-- where T: GraphObject<T>. S can be Set or List.
+findObjectsNear_ :: forall d. IsDiagram d => Point_ -> Number -> d -> Effect (List_ SomeGraphObject_)
+findObjectsNear_ = callUnsafe2 "findObjectsNear"
+
+-- Optional parameters: selectable: boolean
 findPartAt_ :: forall d @p. IsDiagram d => IsPart p => Point_ -> Boolean -> d -> Effect (Maybe p)
 findPartAt_ p b d = toMaybe <$> callUnsafe2 "findPartAt" p b d
 
@@ -98,6 +129,21 @@ findPartForData_ d di = toMaybe <$> callUnsafe1 "findPartForData" d di
 
 findPartForKey_ :: forall d @p k. IsDiagram d => IsPart p => k -> d -> Effect (Maybe p)
 findPartForKey_ k d = toMaybe <$> callUnsafe1 "findPartForKey" k d
+
+-- Optional parameters: selectable: boolean
+-- Optional parameters excluded: coll: S where S can be a Set or List of parts.
+findPartsAt_ :: forall d. IsDiagram d => Point_ -> Boolean -> d -> Effect (List_ SomePart_)
+findPartsAt_ = callUnsafe2 "findPartsAt"
+
+-- Optional parameters: selectable: boolean, partialInclusion: boolean
+-- Optional parameters excluded: coll: S where S can be a Set or List of parts.
+findPartsIn_ :: forall d. IsDiagram d => Rect_ -> Boolean -> Boolean -> d -> Effect (List_ SomePart_)
+findPartsIn_ = callUnsafe3 "findPartsIn"
+
+-- Optional parameters: selectable: boolean, partialInclusion: boolean
+-- Optional parameters excluded: coll: S where S can be a Set or List of parts.
+findPartsNear_ :: forall d. IsDiagram d => Rect_ -> Boolean -> Boolean -> d -> Effect (List_ SomePart_)
+findPartsNear_ = callUnsafe3 "findPartsNear"
 
 findTopLevelGroups_ :: forall d. IsDiagram d => IsDiagram d => d -> Effect (Iterator_ Group_)
 findTopLevelGroups_ = callUnsafe0 "findTopLevelGroups"
@@ -111,11 +157,40 @@ focus_ = callUnsafe0 "focus"
 highlight_ :: forall d p. IsDiagram d => IsPart p => p -> d -> Effect Unit
 highlight_ = callUnsafe1 "highlight"
 
-highlightCollection_ :: forall d p. IsDiagram d => IsPart p => Array p -> d -> Effect Unit
-highlightCollection_ = callUnsafe1 "highlightCollection"
+highlightCollection_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> d -> Effect Unit
+highlightCollection_ coll diagram = coll #
+  ( case_
+      # on (Proxy @"array") (\array -> callUnsafe1 "highlightCollection" array diagram)
+      # on (Proxy @"iterator") (\iterator -> callUnsafe1 "highlightCollection" iterator diagram)
+  )
 
+-- Optional parameters: invalidateAll: boolean
 layoutDiagram_ :: forall d. IsDiagram d => Boolean -> d -> Effect Unit
 layoutDiagram_ = callUnsafe1 "layoutDiagram"
+
+-- Using purescript-web-html's binding to HTMLImageElement
+-- Optional parameters excluded: options: ImageRendererOptions
+makeImage_ :: forall d. IsDiagram d => d -> Effect HTMLImageElement
+makeImage_ = callUnsafe0 "makeImage"
+
+-- TODO: makeImageData is omitted because it returns a union type - we'd
+-- like it to return a Variant, but that requires some fiddling in the JavaScript level.
+
+-- Optional parameters excluded: options: SvgRendererOptions
+-- TODO: makeSvg is omitted because it returns an SVGElement - I couldn't find
+-- an established library that handles the conversion of this type to PureScript.
+-- makeSvg_ :: forall d. IsDiagram d => d -> Effect SVGElement
+-- makeSvg_ = callUnsafe0 "makeSvg"
+
+-- Optional parameters: check: boolean, dragOptions: DraggingOptions
+moveParts_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> Point_ -> Boolean -> DraggingOptions_ -> d -> Effect Unit
+moveParts_ coll offset check draggingOptions diagram = coll #
+  ( case_
+      # on (Proxy @"array") (\array -> callUnsafe4 "moveParts" array offset check draggingOptions diagram)
+      # on (Proxy @"iterator") (\iterator -> callUnsafe4 "moveParts" iterator offset check draggingOptions diagram)
+  )
+
+
 
 -- Undocumented
 raiseDiagramEvent_ :: forall d. String -> d -> Effect Unit
@@ -127,22 +202,35 @@ rebuildParts_ = callUnsafe0 "rebuildParts"
 remove_ :: forall d p. IsDiagram d => IsPart p => p -> d -> Effect Unit
 remove_ = callUnsafe1 "remove"
 
+removeChangedListener_ :: forall d. IsDiagram d => String -> (Fn1 ChangedEvent_ Unit) -> d -> Effect Unit
+removeChangedListener_ name listener d = callUnsafe2 "removeChangedListener" name listener d
+
 removeDiagramListener_ :: forall d s. IsDiagram d => String -> (Fn1 (DiagramEvent_ s) Unit) -> d -> Effect Unit
 removeDiagramListener_ name listener d = callUnsafe2 "removeDiagramListener" name listener d
 
 removeLayer_ :: forall d. IsDiagram d => Layer_ -> d -> Effect Unit
 removeLayer_ = callUnsafe1 "removeLayer"
 
--- TODO: Can all iterables just be foldables? TODO: check? optional argument
-removeParts_ :: forall d p f. IsDiagram d => IsPart p => Foldable f => f p -> d -> Effect Unit
-removeParts_ = callUnsafe1 "removeParts"
+removeModelChangedListener_ :: forall d. IsDiagram d => String -> (Fn1 ChangedEvent_ Unit) -> d -> Effect Unit
+removeModelChangedListener_ name listener d = callUnsafe2 "removeModelChangedListener" name listener d
 
+-- Optional parameters: check: boolean
+removeParts_ :: forall d. IsDiagram d => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> Boolean -> d -> Effect Unit
+removeParts_ coll check diagram = coll #
+  ( case_
+      # on (Proxy @"array") (\array -> callUnsafe2 "removeParts" array check diagram)
+      # on (Proxy @"iterator") (\iterator -> callUnsafe2 "removeParts" iterator check diagram)
+  )
+
+-- Optional parameters: alwaysQueueUpdate: boolean
 requestUpdate_ :: forall d. IsDiagram d => Boolean -> d -> Effect Unit
 requestUpdate_ = callUnsafe1 "requestUpdate"
 
-rollbackTransaction_ :: forall d. IsDiagram d => IsDiagram d => d -> Effect Boolean
+rollbackTransaction_ :: forall d. IsDiagram d => d -> Effect Boolean
 rollbackTransaction_ = callUnsafe0 "rollbackTransaction"
 
+-- Optional parameters: dist: number
+-- Params: unit: "pixel" | "line" | "page" | "document", dir: "up" | "down" | "left" | "right" 
 scroll_ :: forall d. IsDiagram d => String -> String -> Number -> d -> Effect Unit
 scroll_ = callUnsafe3 "scroll"
 
@@ -152,8 +240,14 @@ scrollToRect_ = callUnsafe1 "scrollToRect"
 select_ :: forall d p. IsDiagram d => IsPart p => p -> d -> Effect Unit
 select_ = callUnsafe1 "select"
 
-selectCollection_ :: forall d p. IsDiagram d => IsPart p => Array p -> d -> Effect Unit
-selectCollection_ = callUnsafe1 "selectCollection"
+selectCollection_ :: forall d p. IsDiagram d => IsPart p => Variant (array :: Array SomePart_, iterator :: Iterator_ SomePart_) -> d -> Effect Unit
+selectCollection_ coll diagram = coll #
+  ( case_
+      # on (Proxy @"array") (\array -> callUnsafe1 "selectCollection" array diagram)
+      # on (Proxy @"iterator") (\iterator -> callUnsafe1 "selectCollection" iterator diagram)
+  )
+
+-- set, setProperties and attach are all handled via `setUnsafe`.
 
 startTransaction_ :: forall d. IsDiagram d => String -> d -> Effect Boolean
 startTransaction_ = callUnsafe1 "startTransaction"
@@ -167,64 +261,15 @@ transformViewToDoc_ = callUnsafe1 "transformViewToDoc"
 updateAllRelationshipsFromData_ :: forall d. IsDiagram d => IsDiagram d => d -> Effect Unit
 updateAllRelationshipsFromData_ = callUnsafe0 "updateAllRelationshipsFromData"
 
+-- Optional parameters: srcprop: string
 updateAllTargetBindings_ :: forall d. IsDiagram d => String -> d -> Effect Unit
 updateAllTargetBindings_ = callUnsafe1 "updateAllTargetBindings"
 
 zoomToFit_ :: forall d. IsDiagram d => IsDiagram d => d -> Effect Unit
 zoomToFit_ = callUnsafe0 "zoomToFit"
 
+-- Optional parameters: scaling: EnumValue
 zoomToRect_ :: forall d. IsDiagram d => Rect_ -> EnumValue_ -> d -> Effect Unit
 zoomToRect_ = callUnsafe2 "zoomToRect"
 
-isUsingDOM_ :: forall d. IsDiagram d => IsDiagram d => d -> Effect Boolean
-isUsingDOM_ = callUnsafe0 "isUsingDOM"
-
-useDOM_ :: forall d. IsDiagram d => Boolean -> d -> Effect Unit
-useDOM_ = callUnsafe1 "useDOM"
-
--- set :: forall d. IsDiagram d => Partial<Diagram>_ -> Effect d
--- set = callUnsafe1 "set"
--- fromDiv :: forall d. IsDiagram d => string | Element_ -> Effect d
--- fromDiv = callUnsafe1 "fromDiv"
--- inherit :: forall d. IsDiagram d => Function_ -> Function_ -> Effect Unit
--- inherit = callUnsafe2 "inherit"
--- addModelChangedListener :: forall d. IsDiagram d => ChangedEvent) => void_ -> Effect d
--- addModelChangedListener = callUnsafe1 "addModelChangedListener"
--- addChangedListener :: forall d. IsDiagram d => (ChangedEvent) => void_ -> Effect d
--- addChangedListener = callUnsafe1 "addChangedListener"
--- removeChangedListener :: forall d. IsDiagram d => ChangedEvent) => void_ -> Effect Unit
--- removeChangedListener = callUnsafe1 "removeChangedListener"
--- removeModelChangedListener :: forall d. IsDiagram d => ChangedEvent) => void_ -> Effect Unit
--- removeModelChangedListener = callUnsafe1 "removeModelChangedListener"
--- makeImage :: forall d. IsDiagram d => ImageRendererOptions_ -> Effect HTMLImageElement_
--- makeImage = callUnsafe1 "makeImage"
--- makeImageData :: forall l. ImageRendererOptions_ -> Effect string | HTMLImageElement | ImageData_
--- makeImageData = callUnsafe1 "makeImageData"
--- makeSvg :: forall l. SvgRendererOptions_ -> Effect SVGElement_
--- makeSvg = callUnsafe1 "makeSvg"
--- moveParts :: forall l p. IsPart p => Array p -> Point_ -> Boolean -> DraggingOptions_ -> Effect Unit
--- moveParts = callUnsafe4 "moveParts"
--- findObjectAt :: forall l. Point_ -> GraphObject) => T_ -> T) => boolean_ -> Effect T_
--- findObjectAt = callUnsafe3 "findObjectAt"
--- findObjectsAt :: forall l. Point_ -> GraphObject) => T_ -> T) => boolean_ -> S_ -> Effect S_
--- findObjectsAt = callUnsafe4 "findObjectsAt"
--- findObjectsIn :: forall l. Rect_ -> GraphObject) => T_ -> T) => boolean_ -> Boolean -> S_ -> Effect S_
--- findObjectsIn = callUnsafe5 "findObjectsIn"
--- findObjectsNear :: forall l. Point_ -> Number -> GraphObject) => T_ -> T) => boolean_ -> boolean | S_ -> S_ -> Effect S_
--- findObjectsNear = callUnsafe6 "findObjectsNear"
--- delayInitialization :: forall l. Diagram) => void_ -> Effect Unit
--- delayInitialization = callUnsafe1 "delayInitialization"
--- copyParts :: forall d. Array Part_ -> d -> Boolean -> Effect Map<Part, Part>_
--- copyParts = callUnsafe3 "copyParts"
--- commit :: forall l. Diagram) => void_ -> String -> Effect Unit
--- commit = callUnsafe2 "commit"
--- computeMove :: forall p. p -> Point_ -> DraggingOptions_ -> Point_ -> Effect Point_
--- computeMove = callUnsafe4 "computeMove"
--- findPartsAt :: forall l. Point_ -> Boolean -> S_ -> Effect S_
--- findPartsAt = callUnsafe3 "findPartsAt"
--- findPartsIn :: forall l. Rect_ -> Boolean -> Boolean -> S_ -> Effect S_
--- findPartsIn = callUnsafe4 "findPartsIn"
--- findPartsNear :: forall l. Point_ -> Number -> Boolean -> Boolean -> S_ -> Effect S_
--- findPartsNear = callUnsafe5 "findPartsNear"
--- setProperties_ :: r forall d. IsDiagram d => Record r -> d -> Effect d
--- setProperties_ = callUnsafe1 "setProperties"
+-- TODO: Static methods: fromDiv, inherit, isUsingDOM, useDOM

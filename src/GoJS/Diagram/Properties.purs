@@ -6,12 +6,12 @@ import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.Collection (Iterator_, Set_)
 import GoJS.Diagram.CommandHandler.Types (CommandHandler_)
-import GoJS.Diagram.Types (class IsDiagram, InputEvent_)
-import GoJS.GraphObject.Types (class IsPanel, class IsPart, Adornment_, Group_, Link_, Node_, Part_)
+import GoJS.Diagram.Types (class IsDiagram, AnimationManager_, InputEvent_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
+import GoJS.GraphObject.Types (class IsPanel, class IsPart, Adornment_, Group_, Link_, SomeNode_, SomePart_)
 import GoJS.Layout.Types (class IsLayout)
-import GoJS.Model.Types (class IsModel)
+import GoJS.Model.Types (class IsModel, UndoManager_)
 import GoJS.Tool.Types (ToolManager_)
 import GoJS.Unsafe (getUnsafe)
 
@@ -75,6 +75,10 @@ _allowVerticalScroll = getUnsafe [ "allowVerticalScroll" ]
 _allowZoom :: forall d. IsDiagram d => d -> Boolean
 _allowZoom = getUnsafe [ "allowZoom" ]
 
+-- Read-only
+_animationManager :: forall d. IsDiagram d => d -> AnimationManager_
+_animationManager = getUnsafe [ "animationManager" ]
+
 _autoScale :: forall d. IsDiagram d => d -> EnumValue_
 _autoScale = getUnsafe [ "autoScale" ]
 
@@ -102,6 +106,7 @@ _defaultCursor = getUnsafe [ "defaultCursor" ]
 _defaultScale :: forall d. IsDiagram d => d -> Number
 _defaultScale = getUnsafe [ "defaultScale" ]
 
+-- Read-only
 _documentBounds :: forall d. IsDiagram d => d -> Rect_
 _documentBounds = getUnsafe [ "documentBounds" ]
 
@@ -129,7 +134,8 @@ _hasHorizontalScrollbar = getUnsafe [ "hasHorizontalScrollbar" ]
 _hasVerticalScrollbar :: forall d. IsDiagram d => d -> Boolean
 _hasVerticalScrollbar = getUnsafe [ "hasVerticalScrollbar" ]
 
-_highlighteds :: forall d. IsDiagram d => d -> Set_ Part_
+-- Read-only
+_highlighteds :: forall d. IsDiagram d => d -> Set_ SomePart_
 _highlighteds = getUnsafe [ "highlighteds" ]
 
 _initialAutoScale :: forall d. IsDiagram d => d -> EnumValue_
@@ -171,6 +177,10 @@ _isTreePathToChildren = getUnsafe [ "isTreePathToChildren" ]
 _lastInput :: forall d. IsDiagram d => d -> InputEvent_ d
 _lastInput = getUnsafe [ "lastInput" ]
 
+-- Read-only
+_layers :: forall d. IsDiagram d => d -> Iterator_ Layer_
+_layers = getUnsafe [ "layers" ]
+
 _layout :: forall d @l. IsDiagram d => IsLayout l => d -> l
 _layout = getUnsafe [ "layout" ]
 
@@ -180,6 +190,7 @@ _linkSelectionAdornmentTemplate = toMaybe <<< getUnsafe [ "linkSelectionAdornmen
 _linkTemplate :: forall d. IsDiagram d => d -> Link_
 _linkTemplate = getUnsafe [ "linkTemplate" ]
 
+-- Read-only
 _links :: forall d. IsDiagram d => d -> Iterator_ Link_
 _links = getUnsafe [ "links" ]
 
@@ -198,10 +209,12 @@ _model = getUnsafe [ "model" ]
 _nodeSelectionAdornmentTemplate :: forall d. IsDiagram d => d -> Maybe Adornment_
 _nodeSelectionAdornmentTemplate = toMaybe <<< getUnsafe [ "nodeSelectionAdornmentTemplate" ]
 
-_nodeTemplate :: forall d. IsDiagram d => d -> Part_
+-- Read-only
+_nodeTemplate :: forall d @p. IsDiagram d => IsPart p => d -> p
 _nodeTemplate = getUnsafe [ "nodeTemplate" ]
 
-_nodes :: forall d. IsDiagram d => d -> Iterator_ Node_
+-- Read-only
+_nodes :: forall d. IsDiagram d => d -> Iterator_ SomeNode_
 _nodes = getUnsafe [ "nodes" ]
 
 _opacity :: forall d. IsDiagram d => d -> Number
@@ -210,7 +223,8 @@ _opacity = getUnsafe [ "opacity" ]
 _padding :: forall d. IsDiagram d => d -> Margin_
 _padding = getUnsafe [ "padding" ]
 
-_parts :: forall d. IsDiagram d => d -> Iterator_ Part_
+-- Read-only
+_parts :: forall d. IsDiagram d => d -> Iterator_ SomePart_
 _parts = getUnsafe [ "parts" ]
 
 _position :: forall d. IsDiagram d => d -> Point_
@@ -237,7 +251,8 @@ _scrollVerticalLineChange = getUnsafe [ "scrollVerticalLineChange" ]
 _scrollsPageOnFocus :: forall d. IsDiagram d => d -> Boolean
 _scrollsPageOnFocus = getUnsafe [ "scrollsPageOnFocus" ]
 
-_selection :: forall d @p. IsDiagram d => IsPart p => d -> Set_ p -- TODO: Set can have different types, should use existentials or smth
+-- Read-only
+_selection :: forall d. IsDiagram d => d -> Set_ SomePart_
 _selection = getUnsafe [ "selection" ]
 
 _skipsUndoManager :: forall d. IsDiagram d => d -> Boolean
@@ -246,18 +261,22 @@ _skipsUndoManager = getUnsafe [ "skipsUndoManager" ]
 _toolManager :: forall d. IsDiagram d => d -> ToolManager_
 _toolManager = getUnsafe [ "toolManager" ]
 
+-- Read-only
+_undoManager :: forall d. IsDiagram d => d -> UndoManager_
+_undoManager = getUnsafe [ "undoManager" ]
+
 _validCycle :: forall d. IsDiagram d => d -> EnumValue_
 _validCycle = getUnsafe [ "validCycle" ]
 
 _viewSize :: forall d. IsDiagram d => d -> Size_
 _viewSize = getUnsafe [ "viewSize" ]
 
+-- Read-only
 _viewportBounds :: forall d. IsDiagram d => d -> Rect_
 _viewportBounds = getUnsafe [ "viewportBounds" ]
 
 _zoomPoint :: forall d. IsDiagram d => d -> Point_
 _zoomPoint = getUnsafe [ "zoomPoint" ]
---, animationManager :: AnimationManager
 -- positionComputation
 -- scaleComputation
 -- , nodeTemplateMap :: Map_ String Part_

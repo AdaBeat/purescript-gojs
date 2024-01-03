@@ -10,6 +10,7 @@ workspace:
         - prelude
         - typelevel-prelude
         - variant
+        - web-html
       test_dependencies: []
   package_set:
     address:
@@ -478,6 +479,28 @@ workspace:
       z3: 0.0.2
   extra_packages: {}
 packages:
+  arrays:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 7.3.0
+      integrity: sha256-tmcklBlc/muUtUfr9RapdCPwnlQeB3aSrC4dK85gQlc=
+      dependencies:
+        - bifunctors
+        - control
+        - foldable-traversable
+        - functions
+        - maybe
+        - nonempty
+        - partial
+        - prelude
+        - safe-coerce
+        - st
+        - tailrec
+        - tuples
+        - unfoldable
+        - unsafe-coerce
   bifunctors:
     needed_by:
       - gojs
@@ -535,6 +558,30 @@ packages:
       dependencies:
         - newtype
         - prelude
+  datetime:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.1.0
+      integrity: sha256-g/5X5BBegQWLpI9IWD+sY6mcaYpzzlW5lz5NBzaMtyI=
+      dependencies:
+        - bifunctors
+        - control
+        - either
+        - enums
+        - foldable-traversable
+        - functions
+        - gen
+        - integers
+        - lists
+        - maybe
+        - newtype
+        - numbers
+        - ordered-collections
+        - partial
+        - prelude
+        - tuples
   distributive:
     needed_by:
       - gojs
@@ -587,6 +634,18 @@ packages:
         - prelude
         - tuples
         - unfoldable
+  exceptions:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.0.0
+      integrity: sha256-y/xTAEIZIARCE+50/u1di0ncebJ+CIwNOLswyOWzMTw=
+      dependencies:
+        - effect
+        - either
+        - maybe
+        - prelude
   exists:
     needed_by:
       - gojs
@@ -615,6 +674,23 @@ packages:
         - orders
         - prelude
         - tuples
+  foreign:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 7.0.0
+      integrity: sha256-1ORiqoS3HW+qfwSZAppHPWy4/6AQysxZ2t29jcdUMNA=
+      dependencies:
+        - either
+        - functions
+        - identity
+        - integers
+        - lists
+        - maybe
+        - prelude
+        - strings
+        - transformers
   functions:
     needed_by:
       - gojs
@@ -675,6 +751,17 @@ packages:
         - invariant
         - newtype
         - prelude
+  integers:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.0.0
+      integrity: sha256-sf+sK26R1hzwl3NhXR7WAu9zCDjQnfoXwcyGoseX158=
+      dependencies:
+        - maybe
+        - numbers
+        - prelude
   invariant:
     needed_by:
       - gojs
@@ -685,6 +772,20 @@ packages:
       dependencies:
         - control
         - prelude
+  js-date:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 8.0.0
+      integrity: sha256-6TVF4DWg5JL+jRAsoMssYw8rgOVALMUHT1CuNZt8NRo=
+      dependencies:
+        - datetime
+        - effect
+        - exceptions
+        - foreign
+        - integers
+        - now
   lazy:
     needed_by:
       - gojs
@@ -729,6 +830,16 @@ packages:
         - invariant
         - newtype
         - prelude
+  media-types:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.0.0
+      integrity: sha256-n/4FoGBasbVSYscGVRSyBunQ6CZbL3jsYL+Lp01mc9k=
+      dependencies:
+        - newtype
+        - prelude
   newtype:
     needed_by:
       - gojs
@@ -753,6 +864,16 @@ packages:
         - prelude
         - tuples
         - unfoldable
+  now:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.0.0
+      integrity: sha256-xZ7x37ZMREfs6GCDw/h+FaKHV/3sPWmtqBZRGTxybQY=
+      dependencies:
+        - datetime
+        - effect
   nullable:
     needed_by:
       - gojs
@@ -764,6 +885,35 @@ packages:
         - effect
         - functions
         - maybe
+  numbers:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 9.0.1
+      integrity: sha256-/9M6aeMDBdB4cwYDeJvLFprAHZ49EbtKQLIJsneXLIk=
+      dependencies:
+        - functions
+        - maybe
+  ordered-collections:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 3.1.1
+      integrity: sha256-boSYHmlz4aSbwsNN4VxiwCStc0t+y1F7BXmBS+1JNtI=
+      dependencies:
+        - arrays
+        - foldable-traversable
+        - gen
+        - lists
+        - maybe
+        - partial
+        - prelude
+        - st
+        - tailrec
+        - tuples
+        - unfoldable
   orders:
     needed_by:
       - gojs
@@ -836,6 +986,42 @@ packages:
       integrity: sha256-a1ibQkiUcbODbLE/WAq7Ttbbh9ex+x33VCQ7GngKudU=
       dependencies:
         - unsafe-coerce
+  st:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.2.0
+      integrity: sha256-z9X0WsOUlPwNx9GlCC+YccCyz8MejC8Wb0C4+9fiBRY=
+      dependencies:
+        - partial
+        - prelude
+        - tailrec
+        - unsafe-coerce
+  strings:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.0.1
+      integrity: sha256-WssD3DbX4OPzxSdjvRMX0yvc9+pS7n5gyPv5I2Trb7k=
+      dependencies:
+        - arrays
+        - control
+        - either
+        - enums
+        - foldable-traversable
+        - gen
+        - integers
+        - maybe
+        - newtype
+        - nonempty
+        - partial
+        - prelude
+        - tailrec
+        - tuples
+        - unfoldable
+        - unsafe-coerce
   tailrec:
     needed_by:
       - gojs
@@ -852,6 +1038,28 @@ packages:
         - partial
         - prelude
         - refs
+  transformers:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.0.0
+      integrity: sha256-Pzw40HjthX77tdPAYzjx43LK3X5Bb7ZspYAp27wksFA=
+      dependencies:
+        - control
+        - distributive
+        - effect
+        - either
+        - exceptions
+        - foldable-traversable
+        - identity
+        - lazy
+        - maybe
+        - newtype
+        - prelude
+        - tailrec
+        - tuples
+        - unfoldable
   tuples:
     needed_by:
       - gojs
@@ -918,3 +1126,57 @@ packages:
         - record
         - tuples
         - unsafe-coerce
+  web-dom:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 6.0.0
+      integrity: sha256-1kSKWFDI4LupdmpjK01b1MMxDFW7jvatEgPgVmCmSBQ=
+      dependencies:
+        - web-events
+  web-events:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 4.0.0
+      integrity: sha256-YDt8b6u1tzGtnWyNRodne57iO8FNSGPaTCVzBUyUn4k=
+      dependencies:
+        - datetime
+        - enums
+        - foreign
+        - nullable
+  web-file:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 4.0.0
+      integrity: sha256-1h5jPBkvjY71jLEdwVadXCx86/2inNoMBO//Rd3eCSU=
+      dependencies:
+        - foreign
+        - media-types
+        - web-dom
+  web-html:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 4.1.0
+      integrity: sha256-ByqS/h1/yG+hjCOnOQp7L1QpIWzQENNKB1kaHtpEhlE=
+      dependencies:
+        - js-date
+        - web-dom
+        - web-file
+        - web-storage
+  web-storage:
+    needed_by:
+      - gojs
+    package:
+      type: registry
+      version: 5.0.0
+      integrity: sha256-q+6lxcnfWxus0/nDeFVtF1V+tLehZvvXQ0cduYPLksY=
+      dependencies:
+        - nullable
+        - web-events
