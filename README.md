@@ -1,6 +1,10 @@
 # GoJS bindings for PureScript
 
-This library contains "low-level" bindings for methods, properties, constructors, and static methods for the [GoJS](link-to-gojs) framework for building interactive diagrams.
+This library contains "low-level" bindings for methods, properties, constructors, and static methods for the [GoJS](https://gojs.net/latest/index.html) framework for building interactive diagrams.
+
+## Module structure
+
+The module structure tries to follow the grouping in the [API section of the GoJS docs](https://gojs.net/latest/api/), with the exception of `GraphObject`, which follows the class structure. The only reason for this is that the `GraphObject` class structure is intricate enough to be in the top-level.
 
 ## Design principles
 
