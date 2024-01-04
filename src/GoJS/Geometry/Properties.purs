@@ -6,6 +6,7 @@ import GoJS.EnumValue (EnumValue_)
 import GoJS.Unsafe (getUnsafe)
 import GoJS.Collection (List_)
 
+-- Read-only
 _bounds :: Geometry_ -> Rect_
 _bounds = getUnsafe [ "bounds" ]
 

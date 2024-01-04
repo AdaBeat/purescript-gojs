@@ -3,7 +3,7 @@ module GoJS.Geometry.Rect.Static where
 import GoJS.Geometry.Types (Rect_)
 import GoJS.Unsafe (callStaticPure1, callStaticPure7)
 
--- Pure static methods
+-- Optional arguments: w: number, h: number
 contains_ :: Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Boolean
 contains_ = callStaticPure7 "Rect" "contains"
 

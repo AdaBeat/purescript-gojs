@@ -10,6 +10,7 @@ add_ = callUnsafe1 "add"
 computeBoundsWithoutOrigin_ :: Geometry_ -> Effect Rect_
 computeBoundsWithoutOrigin_ = callUnsafe0 "computeBoundsWithoutOrigin"
 
+-- Optional parameters excluded: sw: number
 containsPoint_ :: Point_ -> Geometry_ -> Effect Boolean
 containsPoint_ = callUnsafe1 "containsPoint"
 
@@ -22,8 +23,9 @@ getAngleAlongPath_ = callUnsafe2 "getAngleAlongPath"
 getFractionForPoint_ :: Point_ -> Geometry_ -> Effect Number
 getFractionForPoint_ = callUnsafe1 "getFractionForPoint"
 
-getPointAlongPath_ :: Number -> Boolean -> Geometry_ -> Effect Point_
-getPointAlongPath_ = callUnsafe2 "getPointAlongPath"
+-- Optional parameters excluded: result: Point
+getPointAlongPath_ :: Number -> Geometry_ -> Effect Point_
+getPointAlongPath_ = callUnsafe1 "getPointAlongPath"
 
 normalize_ :: Geometry_ -> Effect Geometry_
 normalize_ = callUnsafe0 "normalize"
@@ -31,6 +33,7 @@ normalize_ = callUnsafe0 "normalize"
 offset_ :: Number -> Number -> Geometry_ -> Effect Geometry_
 offset_ = callUnsafe2 "offset"
 
+-- Optional parameters: x: number, y: number
 rotate_ :: Number -> Number -> Number -> Geometry_ -> Effect Geometry_
 rotate_ = callUnsafe3 "rotate"
 

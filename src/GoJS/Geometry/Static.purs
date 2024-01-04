@@ -6,6 +6,7 @@ import GoJS.Unsafe (callStaticPure1)
 fillPath_ :: String -> String
 fillPath_ = callStaticPure1 "Geometry" "fillPath"
 
+-- Optional parameters excluded: filled: boolean
 parse_ :: String -> Geometry_
 parse_ = callStaticPure1 "Geometry" "parse"
 
