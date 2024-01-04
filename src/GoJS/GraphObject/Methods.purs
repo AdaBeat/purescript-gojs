@@ -2,7 +2,6 @@ module GoJS.GraphObject.Methods where
 
 import Prelude
 
-import Data.Unit (Unit)
 import Data.Variant (Variant, case_, on)
 import Effect (Effect)
 import GoJS.Diagram.Types (AnimationTrigger_)

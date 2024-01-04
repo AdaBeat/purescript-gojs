@@ -41,6 +41,7 @@ _allowTextEdit = getUnsafe [ "allowTextEdit" ]
 _allowUngroup :: Layer_ -> Boolean
 _allowUngroup = getUnsafe [ "allowUngroup" ]
 
+-- Read-only
 _diagram :: forall @d. IsDiagram d => Layer_ -> d
 _diagram = getUnsafe [ "diagram" ]
 
@@ -56,9 +57,11 @@ _name = getUnsafe [ "name" ]
 _opacity :: Layer_ -> Number
 _opacity = getUnsafe [ "opacity" ]
 
+-- Read-only
 _parts :: Layer_ -> Iterator_ Part_
 _parts = getUnsafe [ "parts" ]
 
+-- Read-only
 _partsBackwards :: Layer_ -> Iterator_ Part_
 _partsBackwards = getUnsafe [ "partsBackwards" ]
 

@@ -7,6 +7,7 @@ import GoJS.Collection (Iterator_, Set_)
 import GoJS.GraphObject.Types (class IsNode, class IsPart, Group_, Link_, Node_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1)
 
+-- Optional parameters: check: boolean
 addMembers_ :: forall p. IsPart p => Iterator_ p -> Group_ -> Effect Boolean
 addMembers_ = callUnsafe1 "addMembers"
 

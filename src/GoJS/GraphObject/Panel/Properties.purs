@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.Collection (Iterator_)
-import GoJS.GraphObject.Types (class IsPanel, SomeGraphObject_)
+import GoJS.GraphObject.Types (class IsPanel, GraphObject_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Margin_, Point_, Size_, Spot_)
 import GoJS.Unsafe (getUnsafe)
@@ -40,7 +40,7 @@ _defaultSeparatorPadding = getUnsafe [ "defaultSeparatorPadding" ]
 _defaultStretch :: forall p. IsPanel p => p -> EnumValue_
 _defaultStretch = getUnsafe [ "defaultStretch" ]
 
-_elements :: forall p. IsPanel p => p -> Iterator_ SomeGraphObject_
+_elements :: forall p. IsPanel p => p -> Iterator_ GraphObject_
 _elements = getUnsafe [ "elements" ]
 
 _graduatedMax :: forall p. IsPanel p => p -> Number

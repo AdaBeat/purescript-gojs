@@ -11,7 +11,7 @@ import GoJS.Collection (Iterator_, List_, Map_)
 import GoJS.Diagram.Types (class IsDiagram, DiagramEvent_, DraggingOptions_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Point_, Rect_, Spot_)
-import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Group_, Link_, SomeGraphObject_, Node_, Part_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsNode, class IsPart, Group_, Link_, GraphObject_, Node_, Part_)
 import GoJS.Model (ChangedEvent_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe3, callUnsafe4)
 import Type.Prelude (Proxy(..))
@@ -107,17 +107,17 @@ findObjectAt_ p b d = toMaybe <$> callUnsafe2 "findObjectAt" p b d
 
 -- Optional parameters excluded: navig: a: GraphObject => T where T: GraphObject<T>
 -- TODO: Collection can be a Set or a List.
-findObjectsAt_ :: forall d. IsDiagram d => Point_ -> Boolean -> d -> Effect (List_ SomeGraphObject_)
+findObjectsAt_ :: forall d. IsDiagram d => Point_ -> Boolean -> d -> Effect (List_ GraphObject_)
 findObjectsAt_ = callUnsafe2 "findObjectsAt"
 
 -- Optional parameters excluded: navig: a: GraphObject => T, pred: a: T => boolean, partialInclusion: boolean, coll: S
 -- where T: GraphObject<T>. S can be Set or List.
-findObjectsIn_ :: forall d. IsDiagram d => Rect_ -> d -> Effect (List_ SomeGraphObject_)
+findObjectsIn_ :: forall d. IsDiagram d => Rect_ -> d -> Effect (List_ GraphObject_)
 findObjectsIn_ = callUnsafe1 "findObjectsIn"
 
 -- Optional parameters excluded: navig: a: GraphObject => T, pred: a: T => boolean, partialInclusion: boolean, coll: S
 -- where T: GraphObject<T>. S can be Set or List.
-findObjectsNear_ :: forall d. IsDiagram d => Point_ -> Number -> d -> Effect (List_ SomeGraphObject_)
+findObjectsNear_ :: forall d. IsDiagram d => Point_ -> Number -> d -> Effect (List_ GraphObject_)
 findObjectsNear_ = callUnsafe2 "findObjectsNear"
 
 -- Optional parameters: selectable: boolean

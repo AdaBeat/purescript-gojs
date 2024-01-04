@@ -41,6 +41,7 @@ computePoints_ = callUnsafe0 "computePoints"
 computeSpacing_ :: Link_ -> Effect Number
 computeSpacing_ = callUnsafe0 "computeSpacing"
 
+-- Optional parameters: port: GraphObject
 computeSpot_ :: forall g. IsGraphObject g => Boolean -> g -> Link_ -> Effect Spot_
 computeSpot_ = callUnsafe2 "computeSpot"
 
@@ -53,9 +54,11 @@ findClosestSegment_ = callUnsafe1 "findClosestSegment"
 getLinkDirection_ :: forall n1 g1 n2 g2. IsNode n1 => IsGraphObject g1 => IsNode n2 => IsGraphObject g2 => n1 -> g1 -> Point_ -> Spot_ -> Boolean -> Boolean -> n2 -> g2 -> Link_ -> Effect Number
 getLinkDirection_ = callUnsafe8 "getLinkDirection"
 
+-- Optional parameters: point: Point
 getLinkPoint_ :: forall n g. IsNode n => IsGraphObject g => n -> g -> Spot_ -> Boolean -> Boolean -> n -> g -> Point_ -> Link_ -> Effect Point_
 getLinkPoint_ = callUnsafe8 "getLinkPoint"
 
+-- Optional parameters: point: Point
 getLinkPointFromPoint_ :: forall n g. IsNode n => IsGraphObject g => n -> g -> Point_ -> Point_ -> Boolean -> Point_ -> Link_ -> Effect Point_
 getLinkPointFromPoint_ = callUnsafe6 "getLinkPointFromPoint"
 
@@ -80,6 +83,7 @@ invalidateRoute_ = callUnsafe0 "invalidateRoute"
 makeGeometry_ :: Link_ -> Effect Geometry_
 makeGeometry_ = callUnsafe0 "makeGeometry"
 
+-- Optional parameters: useLocation: boolean
 move_ :: Point_ -> Boolean -> Link_ -> Effect Unit
 move_ = callUnsafe2 "move"
 
