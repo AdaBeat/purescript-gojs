@@ -6,6 +6,7 @@ import GoJS.GraphObject.Types (class IsPanel)
 import GoJS.RowColumnDefinition.Types (RowColumnDefinition_)
 import GoJS.Unsafe (getUnsafe)
 
+-- Read-only
 _actual :: RowColumnDefinition_ -> Number
 _actual = getUnsafe [ "actual" ]
 
@@ -21,9 +22,11 @@ _coversSeparators = getUnsafe [ "coversSeparators" ]
 _height :: RowColumnDefinition_ -> Number
 _height = getUnsafe [ "height" ]
 
+-- Read-only
 _index :: RowColumnDefinition_ -> Number
 _index = getUnsafe [ "index" ]
 
+-- Read-only
 _isRow :: RowColumnDefinition_ -> Boolean
 _isRow = getUnsafe [ "isRow" ]
 
@@ -33,9 +36,11 @@ _maximum = getUnsafe [ "maximum" ]
 _minimum :: RowColumnDefinition_ -> Number
 _minimum = getUnsafe [ "minimum" ]
 
+-- Read-only
 _panel :: forall @p. IsPanel p => RowColumnDefinition_ -> p
 _panel = getUnsafe [ "panel" ]
 
+-- Read-only
 _position :: RowColumnDefinition_ -> Number
 _position = getUnsafe [ "position" ]
 
@@ -57,6 +62,7 @@ _sizing = getUnsafe [ "sizing" ]
 _stretch :: RowColumnDefinition_ -> EnumValue_
 _stretch = getUnsafe [ "stretch" ]
 
+-- Read-only
 _total :: RowColumnDefinition_ -> Number
 _total = getUnsafe [ "total" ]
 

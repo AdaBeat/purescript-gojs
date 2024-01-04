@@ -32,6 +32,7 @@ _interval = getUnsafe [ "interval" ]
 _isMultiline :: TextBlock_ -> Boolean
 _isMultiline = getUnsafe [ "isMultiline" ]
 
+-- Read-only
 _isOverflowed :: TextBlock_ -> Boolean
 _isOverflowed = getUnsafe [ "isOverflowed" ]
 
@@ -41,9 +42,11 @@ _isStrikethrough = getUnsafe [ "isStrikethrough" ]
 _isUnderline :: TextBlock_ -> Boolean
 _isUnderline = getUnsafe [ "isUnderline" ]
 
+-- Read-only
 _lineCount :: TextBlock_ -> Number
 _lineCount = getUnsafe [ "lineCount" ]
 
+-- Read-only
 _lineHeight :: TextBlock_ -> Number
 _lineHeight = getUnsafe [ "lineHeight" ]
 
