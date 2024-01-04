@@ -13,6 +13,7 @@ import GoJS.Unsafe (getUnsafe)
 _alignmentFocusName :: forall p. IsPanel p => p -> String
 _alignmentFocusName = getUnsafe [ "alignmentFocusName" ]
 
+-- Read-only
 _columnCount :: forall p. IsPanel p => p -> Number
 _columnCount = getUnsafe [ "columnCount" ]
 
@@ -40,6 +41,7 @@ _defaultSeparatorPadding = getUnsafe [ "defaultSeparatorPadding" ]
 _defaultStretch :: forall p. IsPanel p => p -> EnumValue_
 _defaultStretch = getUnsafe [ "defaultStretch" ]
 
+-- Read-only
 _elements :: forall p. IsPanel p => p -> Iterator_ GraphObject_
 _elements = getUnsafe [ "elements" ]
 
@@ -49,6 +51,7 @@ _graduatedMax = getUnsafe [ "graduatedMax" ]
 _graduatedMin :: forall p. IsPanel p => p -> Number
 _graduatedMin = getUnsafe [ "graduatedMin" ]
 
+-- Read-only
 _graduatedRange :: forall p. IsPanel p => p -> Number
 _graduatedRange = getUnsafe [ "graduatedRange" ]
 
@@ -82,6 +85,7 @@ _leftIndex = getUnsafe [ "leftIndex" ]
 _padding :: forall p. IsPanel p => p -> Margin_
 _padding = getUnsafe [ "padding" ]
 
+-- Read-only
 _rowCount :: forall p. IsPanel p => p -> Number
 _rowCount = getUnsafe [ "rowCount" ]
 
@@ -94,5 +98,4 @@ _topIndex = getUnsafe [ "topIndex" ]
 _viewboxStretch :: forall p. IsPanel p => p -> EnumValue_
 _viewboxStretch = getUnsafe [ "viewboxStretch" ]
 
--- itemArray, itemCategoryProperty
--- TODO: , itemTemplateMap :: Map_ String Panel_
+-- TODO: itemArray, itemCategoryProperty, itemTemplateMap

@@ -4,11 +4,15 @@ import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
+import Effect.Uncurried (EffectFn1, EffectFn3)
 import GoJS.Collection (Iterator_)
-import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, Group_)
+import GoJS.Diagram.Types (Layer_)
 import GoJS.Geometry.Types (Point_, Size_, Spot_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, Group_)
+import GoJS.Key (Key, toKey)
 import GoJS.Unsafe (getUnsafe)
 
+-- Read-only
 _adornments :: forall p. IsPart p => p -> Iterator_ Adornment_
 _adornments = getUnsafe [ "adornments" ]
 
@@ -18,14 +22,23 @@ _category = getUnsafe [ "category" ]
 _containingGroup :: forall p. IsPart p => p -> Maybe Group_
 _containingGroup = toMaybe <<< getUnsafe [ "containingGroup" ]
 
+_containingGroupChanged :: forall p. IsPart p => p -> Maybe (EffectFn3 p Group_ Group_ Unit)
+_containingGroupChanged = toMaybe <<< getUnsafe [ "containingGroupChanged" ]
+
 _copyable :: forall p. IsPart p => p -> Boolean
 _copyable = getUnsafe [ "copyable" ]
 
 _deletable :: forall p. IsPart p => p -> Boolean
 _deletable = getUnsafe [ "deletable" ]
 
+_dragComputation :: forall p. IsPart p => p -> Maybe (EffectFn3 p Point_ Point_ Point_)
+_dragComputation = toMaybe <<< getUnsafe [ "dragComputation" ]
+
 _groupable :: forall p. IsPart p => p -> Boolean
 _groupable = getUnsafe [ "groupable" ]
+
+_highlightedChanged :: forall p. IsPart p => p -> Maybe (EffectFn1 p Unit)
+_highlightedChanged = toMaybe <<< getUnsafe [ "highlightedChanged" ]
 
 _isAnimated :: forall p. IsPart p => p -> Boolean
 _isAnimated = getUnsafe [ "isAnimated" ]
@@ -45,8 +58,16 @@ _isSelected = getUnsafe [ "isSelected" ]
 _isShadowed :: forall p. IsPart p => p -> Boolean
 _isShadowed = getUnsafe [ "isShadowed" ]
 
+-- Read-only
 _isTopLevel :: forall p. IsPart p => p -> Boolean
 _isTopLevel = getUnsafe [ "isTopLevel" ]
+
+-- Read-only
+_key :: forall p. IsPart p => p -> Key
+_key = toKey <<< getUnsafe [ "key" ]
+
+_layerChanged :: forall p. IsPart p => p -> Maybe (EffectFn3 p Layer_ Layer_ Unit)
+_layerChanged = toMaybe <<< getUnsafe [ "layerChanged" ]
 
 _layerName :: forall p. IsPart p => p -> String
 _layerName = getUnsafe [ "layerName" ]
@@ -57,6 +78,7 @@ _layoutConditions = getUnsafe [ "layoutConditions" ]
 _location :: forall p. IsPart p => p -> Point_
 _location = getUnsafe [ "location" ]
 
+-- Read-only
 _locationObject :: forall p @g. IsPart p => IsGraphObject g => p -> g
 _locationObject = getUnsafe [ "locationObject" ]
 
@@ -87,6 +109,7 @@ _resizeAdornmentTemplate = toMaybe <<< getUnsafe [ "resizeAdornmentTemplate" ]
 _resizeCellSize :: forall p. IsPart p => p -> Size_
 _resizeCellSize = getUnsafe [ "resizeCellSize" ]
 
+-- Read-only
 _resizeObject :: forall p @g. IsPart p => IsGraphObject g => p -> g
 _resizeObject = getUnsafe [ "resizeObject" ]
 
@@ -99,6 +122,7 @@ _rotatable = getUnsafe [ "rotatable" ]
 _rotateAdornmentTemplate :: forall p. IsPart p => p -> Adornment_
 _rotateAdornmentTemplate = getUnsafe [ "rotateAdornmentTemplate" ]
 
+-- Read-only
 _rotateObject :: forall p @g. IsPart p => IsGraphObject g => p -> g
 _rotateObject = getUnsafe [ "rotateObject" ]
 
@@ -117,6 +141,7 @@ _selectionAdorned = getUnsafe [ "selectionAdorned" ]
 _selectionAdornmentTemplate :: forall p. IsPart p => p -> Maybe Adornment_
 _selectionAdornmentTemplate = toMaybe <<< getUnsafe [ "selectionAdornmentTemplate" ]
 
+-- Read-only
 _selectionObject :: forall p @g. IsPart p => IsGraphObject g => p -> g
 _selectionObject = getUnsafe [ "selectionObject" ]
 
@@ -140,9 +165,3 @@ _textEditable = getUnsafe [ "textEditable" ]
 
 _zOrder :: forall p. IsPart p => p -> Int
 _zOrder = getUnsafe [ "zOrder" ]
-
--- containingGroupChanged
--- selectionChanged
--- dragComputation
--- highlightedChange
--- key, layer, layerChanged
