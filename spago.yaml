@@ -11,6 +11,7 @@ package:
     - prelude
     - typelevel-prelude
     - variant
+    - web-events
     - web-html
 workspace:
   package_set:

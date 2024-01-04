@@ -10,6 +10,7 @@ workspace:
         - prelude
         - typelevel-prelude
         - variant
+        - web-events
         - web-html
       test_dependencies: []
   package_set:
