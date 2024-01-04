@@ -2,9 +2,12 @@ module GoJS.GraphObject.Types where
 
 import Prelude
 
+import Data.Maybe (Maybe(..))
+import GoJS.Unsafe.InstanceOf (isInstanceOf)
 import Unsafe.Coerce (unsafeCoerce)
 
 -- | GraphObject types
+foreign import data GraphObject_ :: Type -- Has no constructor
 foreign import data Shape_ :: Type
 foreign import data Picture_ :: Type
 foreign import data TextBlock_ :: Type
@@ -16,12 +19,9 @@ foreign import data Adornment_ :: Type
 foreign import data Node_ :: Type
 foreign import data Link_ :: Type
 foreign import data Group_ :: Type
-
--- | Existential versions of graph objects that are parent classes
-newtype SomeGraphObject_ = SomeGraphObject_ (forall g. IsGraphObject g => g)
-
 class IsGraphObject (a :: Type)
 
+instance IsGraphObject GraphObject_
 instance IsGraphObject Shape_
 instance IsGraphObject Placeholder_
 instance IsGraphObject TextBlock_
@@ -33,40 +33,59 @@ instance IsGraphObject Node_
 instance IsGraphObject Group_
 instance IsGraphObject Link_
 instance IsGraphObject Adornment_
-instance IsGraphObject SomeGraphObject_
 
 class IsGraphObject a <= IsPanel a where
-  fromPanel :: Panel_ -> a
+  fromPanel :: Panel_ -> Maybe a
 instance IsPanel Panel_ where
-  fromPanel = identity
+  fromPanel = Just
 instance IsPanel Button_ where -- Buttons are really just panels
-  fromPanel = unsafeCoerce
+  fromPanel = Just <<< unsafeCoerce
 instance IsPanel Part_ where
-  fromPanel = unsafeCoerce
+  fromPanel x 
+    | isInstanceOf x "Part" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 instance IsPanel Node_ where
-  fromPanel = unsafeCoerce
+  fromPanel x 
+    | isInstanceOf x "Node" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 instance IsPanel Group_ where
-  fromPanel = unsafeCoerce
+  fromPanel x 
+    | isInstanceOf x "Group" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 instance IsPanel Link_ where
-  fromPanel = unsafeCoerce
+  fromPanel x 
+    | isInstanceOf x "Link" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 instance IsPanel Adornment_ where
-  fromPanel = unsafeCoerce
+  fromPanel x 
+    | isInstanceOf x "Adornment" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 
 class IsPanel a <= IsPart a where
-  fromPart :: Part_ -> a
+  fromPart :: Part_ -> Maybe a
 instance IsPart Part_ where
-  fromPart = identity
+  fromPart = Just
 instance IsPart Node_ where
-  fromPart = unsafeCoerce
+  fromPart x 
+    | isInstanceOf x "Node" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 instance IsPart Group_ where
-  fromPart = unsafeCoerce
+  fromPart x 
+    | isInstanceOf x "Group" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 instance IsPart Link_ where
-  fromPart = unsafeCoerce
+  fromPart x 
+    | isInstanceOf x "Link" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 instance IsPart Adornment_ where
-  fromPart = unsafeCoerce
+  fromPart x 
+    | isInstanceOf x "Adornment" = Just (unsafeCoerce x)
+    | otherwise = Nothing
 class IsPart a <= IsNode a where
-  fromNode :: Node_ -> a
+  fromNode :: Node_ -> Maybe a
 instance IsNode Node_ where
-  fromNode = identity
+  fromNode = Just
 instance IsNode Group_ where
-  fromNode = unsafeCoerce
+  fromNode x 
+    | isInstanceOf x "Group" = Just (unsafeCoerce x)
+    | otherwise = Nothing
