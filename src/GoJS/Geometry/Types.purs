@@ -1,5 +1,6 @@
 module GoJS.Geometry.Types where
 
+foreign import data Brush_ :: Type
 foreign import data Margin_ :: Type
 foreign import data Point_ :: Type
 foreign import data Rect_ :: Type
