@@ -1,4 +1,4 @@
-module GoJS.Settable where
+module GoJS.Unsafe.Set where
 
 import Prelude
 
