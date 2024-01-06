@@ -14,6 +14,7 @@ _arrangesToOrigin = getUnsafe [ "arrangesToOrigin" ]
 _comments :: ForceDirectedLayout_ -> Boolean
 _comments = getUnsafe [ "comments" ]
 
+-- Read-only
 _currentIteration :: ForceDirectedLayout_ -> Number
 _currentIteration = getUnsafe [ "currentIteration" ]
 

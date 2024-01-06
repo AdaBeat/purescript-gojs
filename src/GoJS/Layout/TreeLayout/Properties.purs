@@ -1,8 +1,10 @@
 module GoJS.Layout.TreeLayout.Properties where
 
-import GoJS.Geometry.Types (Spot_)
+import Data.Function.Uncurried (Fn2)
 import GoJS.EnumValue (EnumValue_)
-import GoJS.Layout.Types (TreeLayout_)
+import GoJS.Geometry.Types (Size_, Spot_)
+import GoJS.Layout.LayoutVertex.TreeVertex.Properties (_portSpot)
+import GoJS.Layout.Types (TreeLayout_, TreeVertex_)
 import GoJS.Unsafe (getUnsafe)
 
 _alignment :: TreeLayout_ -> EnumValue_
@@ -28,6 +30,15 @@ _alternateCommentSpacing = getUnsafe [ "alternateCommentSpacing" ]
 
 _alternateCompaction :: TreeLayout_ -> EnumValue_
 _alternateCompaction = getUnsafe [ "alternateCompaction" ]
+
+_alternateComparer :: TreeLayout_ -> Fn2 TreeVertex_ TreeVertex_ Number
+_alternateComparer = getUnsafe [ "alternateComparer" ]
+
+_alternateDefaults :: TreeLayout_ -> TreeVertex_
+_alternateDefaults = getUnsafe [ "alternateDefaults" ]
+
+_alternateLayerSpacing :: TreeLayout_ -> Number
+_alternateLayerSpacing = getUnsafe [ "alternateLayerSpacing" ]
 
 _alternateLayerSpacingParentOverlap :: TreeLayout_ -> Number
 _alternateLayerSpacingParentOverlap = getUnsafe [ "alternateLayerSpacingParentOverlap" ]
@@ -65,6 +76,9 @@ _angle = getUnsafe [ "angle" ]
 _arrangement :: TreeLayout_ -> EnumValue_
 _arrangement = getUnsafe [ "arrangement" ]
 
+_arrangementSpacing :: TreeLayout_ -> Size_
+_arrangementSpacing = getUnsafe [ "arrangementSpacing" ]
+
 _breadthLimit :: TreeLayout_ -> Number
 _breadthLimit = getUnsafe [ "breadthLimit" ]
 
@@ -82,6 +96,9 @@ _comments = getUnsafe [ "comments" ]
 
 _compaction :: TreeLayout_ -> EnumValue_
 _compaction = getUnsafe [ "compaction" ]
+
+_comparer :: TreeLayout_ -> Fn2 TreeVertex_ TreeVertex_ Number
+_comparer = getUnsafe [ "comparer" ]
 
 _layerSpacing :: TreeLayout_ -> Number
 _layerSpacing = getUnsafe [ "layerSpacing" ]
@@ -103,6 +120,14 @@ _nodeSpacing = getUnsafe [ "nodeSpacing" ]
 
 _path :: TreeLayout_ -> EnumValue_
 _path = getUnsafe [ "path" ]
+
+_portSpot :: TreeLayout_ -> Spot_
+_portSpot = getUnsafe [ "portSpot" ]
+
+_rootDefaults :: TreeLayout_ -> TreeVertex_
+_rootDefaults = getUnsafe [ "rootDefaults" ]
+
+-- TODO: _roots should return a set of EITHER Node_ or TreeVertex_
 
 _rowIndent :: TreeLayout_ -> Number
 _rowIndent = getUnsafe [ "rowIndent" ]

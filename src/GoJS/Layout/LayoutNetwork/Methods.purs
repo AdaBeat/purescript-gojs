@@ -2,7 +2,6 @@ module GoJS.Layout.LayoutNetwork.Methods where
 
 import Prelude
 
-import Data.Function.Uncurried (Fn1)
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import Effect (Effect)
@@ -14,8 +13,9 @@ import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe3)
 addEdge_ :: forall _l n e _v. LayoutNetwork _l n e _v => e -> n -> Effect Unit
 addEdge_ = callUnsafe1 "addEdge"
 
-addParts_ :: forall _l n _e _v. LayoutNetwork _l n _e _v => Iterator_ Part_ -> Boolean -> (Fn1 Part_ Boolean) -> n -> Effect Unit
-addParts_ = callUnsafe3 "addParts"
+-- Optional parameters excluded: toplevelonly: boolean, pred: (a: Part) => boolean
+addParts_ :: forall _l n _e _v. LayoutNetwork _l n _e _v => Iterator_ Part_ -> n -> Effect Unit
+addParts_ = callUnsafe1 "addParts"
 
 addLink_ :: forall _l n e _v. LayoutNetwork _l n e _v => Link_ -> n -> Effect e
 addLink_ = callUnsafe1 "addLink"
@@ -65,5 +65,6 @@ linkVertexes_ = callUnsafe3 "linkVertexes"
 reverseEdge_ :: forall _l n e _v. LayoutNetwork _l n e _v => e -> n -> Effect Unit
 reverseEdge_ = callUnsafe1 "reverseEdge"
 
-splitIntoSubNetworks_ :: forall _l n _e _v. LayoutNetwork _l n _e _v => Boolean -> n -> Effect (List_ n)
-splitIntoSubNetworks_ = callUnsafe1 "splitIntoSubNetworks"
+--- Optional parameters excluded: clean: boolean
+splitIntoSubNetworks_ :: forall _l n _e _v. LayoutNetwork _l n _e _v => n -> Effect (List_ n)
+splitIntoSubNetworks_ = callUnsafe0 "splitIntoSubNetworks"

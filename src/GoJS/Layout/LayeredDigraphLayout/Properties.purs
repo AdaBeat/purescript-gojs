@@ -31,18 +31,23 @@ _layerSpacing = getUnsafe [ "layerSpacing" ]
 _layeringOption :: LayeredDigraphLayout_ -> EnumValue_
 _layeringOption = getUnsafe [ "layeringOption" ]
 
+-- Read-only
 _maxColumn :: LayeredDigraphLayout_ -> Number
 _maxColumn = getUnsafe [ "maxColumn" ]
 
+-- Read-only
 _maxIndex :: LayeredDigraphLayout_ -> Number
 _maxIndex = getUnsafe [ "maxIndex" ]
 
+-- Read-only
 _maxIndexLayer :: LayeredDigraphLayout_ -> Number
 _maxIndexLayer = getUnsafe [ "maxIndexLayer" ]
 
+-- Read-only
 _maxLayer :: LayeredDigraphLayout_ -> Number
 _maxLayer = getUnsafe [ "maxLayer" ]
 
+-- Read-only
 _minIndexLayer :: LayeredDigraphLayout_ -> Number
 _minIndexLayer = getUnsafe [ "minIndexLayer" ]
 

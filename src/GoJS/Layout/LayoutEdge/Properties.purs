@@ -8,6 +8,9 @@ import GoJS.GraphObject.Types (Link_)
 import GoJS.Layout (class LayoutNetwork)
 import GoJS.Unsafe (getUnsafe)
 
+_data :: forall _l n _e _v nodeData. LayoutNetwork _l n _e _v => n -> Maybe (Record nodeData)
+_data = toMaybe <<< getUnsafe [ "data" ]
+
 _link :: forall _l _n e v. LayoutNetwork _l _n e v => e -> Maybe Link_
 _link = toMaybe <<< getUnsafe [ "link" ]
 
