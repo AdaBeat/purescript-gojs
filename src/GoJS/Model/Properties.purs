@@ -1,5 +1,7 @@
 module GoJS.Model.Properties where
 
+import Effect.Uncurried (EffectFn1, EffectFn2)
+import GoJS.Model (UndoManager_)
 import GoJS.Model.Types (class IsModel)
 import GoJS.Unsafe (getUnsafe)
 
@@ -11,6 +13,9 @@ _copiesArrays = getUnsafe [ "copiesArrays" ]
 
 _copiesKey :: forall m. IsModel m => m -> Boolean
 _copiesKey = getUnsafe [ "copiesKey" ]
+
+_copyNodeDataFunction :: forall m nodeData. IsModel m => m -> EffectFn2 (Record nodeData) m (Record nodeData)
+_copyNodeDataFunction = getUnsafe [ "copyNodeDataFunction" ]
 
 _dataFormat :: forall m. IsModel m => m -> String
 _dataFormat = getUnsafe [ "dataFormat" ]
@@ -29,5 +34,6 @@ _nodeKeyProperty = getUnsafe [ "nodeKeyProperty" ]
 
 _skipsUndoManager :: forall m. IsModel m => m -> Boolean
 _skipsUndoManager = getUnsafe [ "skipsUndoManager" ]
---, undoManager :: UndoManager_
--- copyNodeDataFunction
+
+_undoManager :: forall m. IsModel m => m -> UndoManager_
+_undoManager = getUnsafe [ "undoManager" ]

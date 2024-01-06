@@ -1,11 +1,13 @@
 module GoJS.Model.TreeModel.Properties where
 
+import Prelude
+
+import GoJS.Key (Key, KeyProperty, toKeyProperty)
 import GoJS.Model.Types (TreeModel_)
 import GoJS.Unsafe (getUnsafe)
 
--- TODO: These may return functions and not strings
-_nodeParentKeyProperty :: forall nodeData. TreeModel_ nodeData -> String
-_nodeParentKeyProperty = getUnsafe [ "nodeParentKeyProperty" ]
+_nodeParentKeyProperty :: forall nodeData. TreeModel_ nodeData -> KeyProperty nodeData Key
+_nodeParentKeyProperty = toKeyProperty <<< getUnsafe [ "nodeParentKeyProperty" ]
 
-_parentLinkCategoryProperty :: forall nodeData. TreeModel_ nodeData -> String
-_parentLinkCategoryProperty = getUnsafe [ "parentLinkCategoryProperty" ]
+_parentLinkCategoryProperty :: forall nodeData. TreeModel_ nodeData -> KeyProperty nodeData String
+_parentLinkCategoryProperty = toKeyProperty <<< getUnsafe [ "parentLinkCategoryProperty" ]

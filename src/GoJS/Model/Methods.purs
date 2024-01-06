@@ -2,136 +2,116 @@ module GoJS.Model.Methods where
 
 import Prelude
 
+import Data.Variant (Variant, case_, on)
 import Effect (Effect)
-import GoJS.Model.Types (class IsModel)
-import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe3)
+import Effect.Uncurried (EffectFn1)
+import GoJS.EnumValue (EnumValue_)
+import GoJS.Key (Key(..), undefinedk)
+import GoJS.Model.Types (class IsModel, ChangedEvent_)
+import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2, callUnsafe3, callUnsafe4, callUnsafe5)
+import Type.Prelude (Proxy(..))
 
-addNodeData_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> (m nodeData)
-  -> Effect Unit
+addChangedListener_ :: forall m nodeData. IsModel (m nodeData) => EffectFn1 ChangedEvent_ Unit -> m nodeData -> Effect (m nodeData)
+addChangedListener_ = callUnsafe1 "addChangedListener"
+
+addNodeData_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> m nodeData -> Effect Unit
 addNodeData_ = callUnsafe1 "addNodeData"
 
-assignAllDataProperties_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> Record nodeData
-  -> (m nodeData)
-  -> Effect Unit
+addNodeDataCollection_ :: forall m nodeData. IsModel (m nodeData) => Array (Record nodeData) -> m nodeData -> Effect Unit
+addNodeDataCollection_ = callUnsafe1 "addNodeDataCollection"
+
+applyIncrementalJson_ :: forall m nodeData. IsModel (m nodeData) => Variant (string :: String, objectData :: nodeData) -> m nodeData -> Effect Unit
+applyIncrementalJson_ incremental model = incremental #
+  ( case_
+      # on (Proxy @"string") (\string -> callUnsafe1 "applyIncrementalJson" string model)
+      # on (Proxy @"objectData") (\objectData -> callUnsafe1 "applyIncrementalJson" objectData model)
+  )
+
+assignAllDataProperties_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> Record nodeData -> m nodeData -> Effect Unit
 assignAllDataProperties_ = callUnsafe2 "assignAllDataProperties"
 
-clear_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => (m nodeData)
-  -> Effect Unit
+clear_ :: forall m nodeData. IsModel (m nodeData) => m nodeData -> Effect Unit
 clear_ = callUnsafe0 "clear"
 
-containsNodeData_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> (m nodeData)
-  -> Effect Boolean
+cloneDeep_ :: forall m nodeData. IsModel (m nodeData) => m nodeData -> Effect (m nodeData)
+cloneDeep_ = callUnsafe0 "cloneDeep"
+
+-- Related to overriding and extensions.
+cloneProtected_ :: forall m nodeData. IsModel (m nodeData) => m nodeData -> Effect Unit
+cloneProtected_ = callUnsafe0 "cloneProtected"
+
+-- Optional parameters: tname: string
+commit_ :: forall m nodeData. IsModel (m nodeData) => (EffectFn1 (m nodeData) Unit) -> String -> m nodeData -> Effect Unit
+commit_ = callUnsafe2 "commit"
+
+commitTransaction_ :: forall m nodeData. IsModel (m nodeData) => String -> m nodeData -> Effect Boolean
+commitTransaction_ = callUnsafe1 "commitTransaction"
+
+containsNodeData_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> m nodeData -> Effect Boolean
 containsNodeData_ = callUnsafe1 "containsNodeData"
 
-copy_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => (m nodeData)
-  -> Effect (m nodeData)
+copy_ :: forall m nodeData. IsModel (m nodeData) => m nodeData -> Effect (m nodeData)
 copy_ = callUnsafe0 "copy"
 
-copyNodeData_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> (m nodeData)
-  -> Effect (Record nodeData)
+copyNodeData_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> m nodeData -> Effect (Record nodeData)
 copyNodeData_ = callUnsafe1 "copyNodeData"
 
-findNodeDataForKey_ :: forall m nodeData k. k -> m -> Effect (Record nodeData)
-findNodeDataForKey_ = callUnsafe1 "findNodeDataForKey"
+findNodeDataForKey_ :: forall m nodeData. IsModel (m nodeData) => Key -> m nodeData  -> Effect (Record nodeData)
+findNodeDataForKey_ = case _ of
+  StringKey s -> callUnsafe1 "findNodeDataForKey" s
+  NumberKey n -> callUnsafe1 "findNodeDataForKey" n
+  UndefinedKey -> callUnsafe1 "findNodeDataForKey" undefinedk
 
-getCategoryForNodeData_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> (m nodeData)
-  -> Effect String
+getCategoryForNodeData_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> m nodeData -> Effect String
 getCategoryForNodeData_ = callUnsafe1 "getCategoryForNodeData"
 
-getKeyForNodeData_ :: forall m nodeData @k. Record nodeData -> m -> Effect k
+getKeyForNodeData_ :: forall m nodeData. Record nodeData -> m -> Effect Key
 getKeyForNodeData_ = callUnsafe1 "getKeyForNodeData"
 
-makeNodeDataKeyUnique_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> (m nodeData)
-  -> Effect Unit
+makeNodeDataKeyUnique_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> m nodeData -> Effect Unit
 makeNodeDataKeyUnique_ = callUnsafe1 "makeNodeDataKeyUnique"
 
-removeNodeData_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> (m nodeData)
-  -> Effect Unit
+mergeNodeDataArray_ :: forall m nodeData. IsModel (m nodeData) => Array (Record nodeData) -> m nodeData -> Effect Unit
+mergeNodeDataArray_ = callUnsafe1 "mergeNodeDataArray"
+
+raiseChangedEvent_ :: forall m nodeData oldval newval. IsModel (m nodeData) => EnumValue_ -> String -> Record nodeData -> oldval -> newval -> m nodeData -> Effect Unit
+raiseChangedEvent_ = callUnsafe5 "raiseChangedEvent"
+
+raiseDataChanged_ :: forall m nodeData oldval newval. IsModel (m nodeData) => Record nodeData -> String -> oldval -> newval -> m nodeData -> Effect Unit
+raiseDataChanged_ = callUnsafe4 "raiseDataChanged"
+
+removeChangedListener_ :: forall m nodeData. IsModel (m nodeData) => EffectFn1 ChangedEvent_ Unit -> m nodeData -> Effect Unit
+removeChangedListener_ = callUnsafe1 "removeChangedListener"
+
+removeNodeData_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> m nodeData -> Effect Unit
 removeNodeData_ = callUnsafe1 "removeNodeData"
 
-rollbackTransaction_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => (m nodeData)
-  -> Effect Boolean
+removeNodeDataCollection_ :: forall m nodeData. IsModel (m nodeData) => Array (Record nodeData) -> m nodeData -> Effect Unit
+removeNodeDataCollection_ = callUnsafe1 "removeNodeDataCollection"
+
+rollbackTransaction_ :: forall m nodeData. IsModel (m nodeData) => m nodeData -> Effect Boolean
 rollbackTransaction_ = callUnsafe0 "rollbackTransaction"
 
-setCategoryForNodeData_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> String
-  -> (m nodeData)
-  -> Effect Unit
+setCategoryForNodeData_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> String -> m nodeData -> Effect Unit
 setCategoryForNodeData_ = callUnsafe2 "setCategoryForNodeData"
 
-setDataProperty_ :: forall m nodeData prop. IsModel m => Record nodeData -> String -> prop -> m -> Effect Unit
+setDataProperty_ :: forall m nodeData prop. IsModel (m nodeData) => Record nodeData -> String -> prop -> m nodeData -> Effect Unit
 setDataProperty_ = callUnsafe3 "setDataProperty"
 
-setKeyForNodeData_ :: forall m nodeData k. IsModel m => Record nodeData -> k -> m -> Effect Unit
-setKeyForNodeData_ = callUnsafe2 "setKeyForNodeData"
+setKeyForNodeData_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> Key -> m nodeData -> Effect Unit
+setKeyForNodeData_ m = case _ of
+  StringKey s -> callUnsafe2 "setKeyForNodeData" m s
+  NumberKey n -> callUnsafe2 "setKeyForNodeData" m n
+  UndefinedKey -> callUnsafe2 "setKeyForNodeData" m undefinedk
 
-updateTargetBindings_
-  :: forall m nodeData
-   . IsModel (m nodeData)
-  => Record nodeData
-  -> String
-  -> (m nodeData)
-  -> Effect Unit
+startTransaction_ :: forall m nodeData. IsModel (m nodeData) => String -> m nodeData -> Effect Boolean
+startTransaction_ = callUnsafe1 "startTransaction"
+
+toJson_ :: forall m. IsModel m => m -> Effect String
+toJson_ = callUnsafe0 "toJson"
+
+updateTargetBindings_ :: forall m nodeData. IsModel (m nodeData) => Record nodeData -> String -> m nodeData -> Effect Unit
 updateTargetBindings_ = callUnsafe2 "updateTargetBindings"
 
--- addChangedListener :: forall m nodeData. IsModel m => ChangedEvent) => void_ -> m -> Effect m
--- addArrayItem :: forall m nodeData. any[]_ -> any_ -> m -> Effect Unit
--- cloneDeep<T> :: forall m. T_ -> m -> Effect T_
--- cloneProtected :: forall m. m -> m -> Effect Unit
--- commit :: forall m. Model) => void_ -> String -> m -> Effect Unit
--- commitTransaction :: forall m. String -> m -> Effect Boolean
--- addNodeDataCollection :: forall m. ObjectData[] | Iterable<ObjectData>_ -> m -> Effect Unit
--- applyIncrementalJson :: forall m. string | Record nodeData -> m -> Effect Unit
--- fromJson :: forall m. string | Record nodeData -> m -> m -> Effect m
--- raiseChangedEvent :: forall m. EnumValue_ -> Record nodeData -> any) => any)_ -> Record nodeData -> any_ -> any_ -> any_ -> any_ -> m -> Effect Unit
--- raiseDataChanged :: forall m. Record nodeData -> Record nodeData -> any) => any)_ -> any_ -> any_ -> any_ -> any_ -> m -> Effect Unit
--- removeArrayItem :: forall m. any[]_ -> Number -> m -> Effect Unit
--- removeChangedListener :: forall m. ChangedEvent) => void_ -> m -> Effect Unit
--- removeNodeDataCollection :: forall m. ObjectData[] | Iterable<ObjectData>_ -> m -> Effect Unit
--- set :: forall m. Record nodeData -> String -> any_ -> m -> Effect Unit
--- toIncrementalData :: forall m. ChangedEvent_ -> m -> Effect IncrementalData_
--- toIncrementalJson :: forall m. ChangedEvent_ -> String -> m -> Effect String
--- toJson :: forall m. String -> m -> Effect String
--- startTransaction :: forall m. String -> m -> Effect Boolean
--- insertArrayItem :: forall m. any[]_ -> Number -> any_ -> m -> Effect Unit
--- mergeNodeDataArray :: forall m. ObjectData[]_ -> m -> Effect Unit
+-- TODO: Implement IncrementalData and related methods: toIncrementalData, toIncrementalJson
+-- TODO: Item-related methods are not supported yet: addArrayItem, removeArrayItem, insertArrayItem

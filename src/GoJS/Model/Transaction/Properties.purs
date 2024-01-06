@@ -4,6 +4,7 @@ import GoJS.Collection (List_)
 import GoJS.Model.Types (ChangedEvent_, Transaction_)
 import GoJS.Unsafe (getUnsafe)
 
+-- Read-only
 _changes :: Transaction_ -> List_ ChangedEvent_
 _changes = getUnsafe [ "changes" ]
 

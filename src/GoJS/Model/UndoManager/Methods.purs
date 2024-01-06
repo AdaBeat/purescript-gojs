@@ -18,6 +18,7 @@ canUndo_ = callUnsafe0 "canUndo"
 clear_ :: UndoManager_ -> Effect Unit
 clear_ = callUnsafe0 "clear"
 
+-- Optional parameters: tname: string
 commitTransaction_ :: String -> UndoManager_ -> Effect Boolean
 commitTransaction_ = callUnsafe1 "commitTransaction"
 
@@ -36,6 +37,7 @@ rollbackTransaction_ = callUnsafe0 "rollbackTransaction"
 skipsEvent_ :: ChangedEvent_ -> UndoManager_ -> Effect Boolean
 skipsEvent_ = callUnsafe1 "skipsEvent"
 
+-- Optional parameters: tname: string
 startTransaction_ :: String -> UndoManager_ -> Effect Boolean
 startTransaction_ = callUnsafe1 "startTransaction"
 

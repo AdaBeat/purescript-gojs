@@ -11,6 +11,7 @@ _change = getUnsafe [ "change" ]
 _diagram :: forall d. IsDiagram d => ChangedEvent_ -> d
 _diagram = getUnsafe [ "diagram" ]
 
+-- Read-only
 _isTransactionFinished :: ChangedEvent_ -> Boolean
 _isTransactionFinished = getUnsafe [ "isTransactionFinished" ]
 
