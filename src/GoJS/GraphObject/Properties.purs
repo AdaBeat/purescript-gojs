@@ -7,7 +7,7 @@ import Data.Nullable (toMaybe)
 import GoJS.Diagram.Types (Diagram_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
-import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, Panel_)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, ContextMenu_, Panel_, toContextMenu)
 import GoJS.Unsafe (getUnsafe)
 
 -- Read-only
@@ -32,9 +32,8 @@ _column = getUnsafe [ "column" ]
 _columnSpan :: forall g. IsGraphObject g => g -> Number
 _columnSpan = getUnsafe [ "columnSpan" ]
 
--- TODO: Can be HTMLInfo.
-_contextMenu :: forall g. IsGraphObject g => g -> Maybe Adornment_
-_contextMenu = toMaybe <<< getUnsafe [ "contextMenu" ]
+_contextMenu :: forall g. IsGraphObject g => g -> Maybe ContextMenu_
+_contextMenu = toContextMenu <<< getUnsafe [ "contextMenu" ]
 
 _cursor :: forall g. IsGraphObject g => g -> String
 _cursor = getUnsafe [ "cursor" ]

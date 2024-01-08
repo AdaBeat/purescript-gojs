@@ -9,7 +9,7 @@ import GoJS.Diagram.CommandHandler.Types (CommandHandler_)
 import GoJS.Diagram.Types (class IsDiagram, AnimationManager_, InputEvent_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
-import GoJS.GraphObject.Types (class IsPanel, class IsPart, Adornment_, Group_, Link_, Node_, Part_)
+import GoJS.GraphObject.Types (class IsPanel, class IsPart, Adornment_, ContextMenu_, Group_, Link_, Node_, Part_, toContextMenu)
 import GoJS.Layout.Types (class IsLayout)
 import GoJS.Model.Types (class IsModel, UndoManager_)
 import GoJS.Tool.Types (ToolManager_)
@@ -94,8 +94,8 @@ _commandHandler = getUnsafe [ "commandHandler" ]
 _contentAlignment :: forall d. IsDiagram d => d -> Spot_
 _contentAlignment = getUnsafe [ "contentAlignment" ]
 
-_contextMenu :: forall d. IsDiagram d => d -> Maybe Adornment_
-_contextMenu = toMaybe <<< getUnsafe [ "contextMenu" ]
+_contextMenu :: forall d. IsDiagram d => d -> Maybe ContextMenu_
+_contextMenu = toContextMenu <<< getUnsafe [ "contextMenu" ]
 
 _currentCursor :: forall d. IsDiagram d => d -> String
 _currentCursor = getUnsafe [ "currentCursor" ]

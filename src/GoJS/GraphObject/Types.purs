@@ -3,6 +3,7 @@ module GoJS.GraphObject.Types where
 import Prelude
 
 import Data.Maybe (Maybe(..))
+import GoJS.Tool.Types (HTMLInfo_)
 import GoJS.Unsafe.InstanceOf (isInstanceOf)
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -89,3 +90,13 @@ instance IsNode Group_ where
   fromNode x 
     | isInstanceOf x "Group" = Just (unsafeCoerce x)
     | otherwise = Nothing
+
+data ContextMenu_
+  = AdornmentContextMenu Adornment_
+  | HTMLInfoContextMenu HTMLInfo_
+
+toContextMenu :: forall a. a -> Maybe ContextMenu_
+toContextMenu x
+  | isInstanceOf x "Adornment" = Just (AdornmentContextMenu (unsafeCoerce x))
+  | isInstanceOf x "HTMLInfo" = Just (HTMLInfoContextMenu (unsafeCoerce x))
+  | otherwise = Nothing
