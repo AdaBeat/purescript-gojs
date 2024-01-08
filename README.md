@@ -28,44 +28,32 @@ Some methods in GoJS return collections of `GraphObject`s. One can have an array
 ```typescript
 myArr: Part[] = [new Part(), new Node(), new Group()]
 ```
-Collections in PureScript are almost always homogeneous, which means every element of the collection has to be of the same type. There's several ways to encode this in PureScript:
-1. An array of a sum type:
-```purescript
-data ConcretePart_
-  = ConcretePart Part_
-  | ConcreteNode Node_
-  | ConcreteGroup Group
-  -- ... link, adornment
-myArr :: Array ConcretePart_
-myArr = [ConcretePart part, ConcreteNode node, ConcreteGroup group]
-```
-2. An array of an existential type:
-```purescript
-newtype SomePart_ = SomePart_ (forall p. IsPart p => p)
-myArr :: Array SomePart_
-myArr = [SomePart_ part, SomePart_ node, SomePart_ group]
-```
-3. An array of plain `Part_`s (so we consider every element of the array to be just the concrete opaque `Part_` type, even some of them might be `Node_`s). We can then convert them to child classes with `instanceof`.
+Collections in PureScript are almost always homogeneous, which means every element of the collection has to be of the same type. There's several ways to encode this in PureScript, like arrays of sum types, existential types, or concrete types that can be converted to their "children". We go with the last option here. For example, if you want to call a node method in a particular element of a collection of `Part`s, you could do this:
 
-Each of these approaches has significant drawbacks:
-1. The problem with a sum type is that, in order to convert the collection from JavaScript to the PureScript sum type, the entire collection needs to be traversed *at the javascript level*, and have its elements wrapped *there* with a PureScript value constructor, after a call to `instanceof`. This may be inefficient and could interfere with any lazy semantics that GoJS might have.
-2. The problem with existential types is that it's impossible to call functions from, say, the `Node` class on the wrapped values, because all the compiler knows is that it's a `Part`. This can be worked around with conversion functions whose implementations are just `unsafeCoerce`; this is inherently not type safe, so the calling code should know when it's appropriate. It's also more boilerplate and mental overhead.
-3. The problem with plain `Part_`s (and its analogous versions for `Node_`s, `Panel_`s etc) is that it requires conversion code to be called in potentially several places.
-  
-We are going with the third option as the best tradeoff between type safety and convenience.
+```purescript
+...
+let setOfParts = diag # _selection
+case fromPart <=< setFirst $ setOfParts of
+  Just node -> useNode node -- assuming useNode :: Node_ -> Effect Unit
+  Nothing -> pure unit
+...
+```
 
-1. **Polymorphic return types**: Many methods return classes. In this case we do allow the caller to determine the output, by having the output type as a visible type variable. This is often needed if the output of such a function is not called by a function accepting a concrete type (and instead accepts any argument implementing a child class), which would disambiguate the type. For example, consider the following code:
+Note that if the `useNode` function above was *poly*morphic in its input, we'd need to explicitly specify the type we're converting from with `fromPart @Node_`, otherwise we'd get an ambiguous type error, which brings us to the next section.
+
+#### Polymorphic return types
+Many methods return classes. In this case we do allow the caller to determine the output, by having the output type as a visible type variable. This is more or less a shorthand for calling `fromPart` as above, by applying the type directly. This is often needed if the output of such a function is not used by a monomorphic function. For example, consider the following code:
 ```purescript
 myNode <- someLink # _fromNode -- _fromNode :: forall @n. IsNode n => Link_ -> Maybe n
 case myNode of
-  Just n -> n # findColumnForLocalX_ 10.0 -- forall p. IsPanel p => Number -> p -> Effect Number
+  Just n -> n # findColumnForLocalX_ 10.0 -- findColumnForLocalX_ :: forall p. IsPanel p => Number -> p -> Effect Number
   Nothing -> pure 20.0
 ```
 The PureScript compiler can't know what the type of `n` should be. All it knows is that it implements the `IsNode` class - it is ambiguous, and so will refuse to compile this code. The solution is to type apply the output of `_fromNode`, like so: 
 ```purescript
 myNode <- someLink # _fromNode @Group_ -- _fromNode :: Link_ -> Maybe Group_
 case myNode of
-  Just n -> n # findColumnForLocalX_ 10.0 -- Number -> Group_ -> Effect Number
+  Just n -> n # findColumnForLocalX_ 10.0 -- findColumnForLocalX_ :: Number -> Group_ -> Effect Number
   Nothing -> pure 20.0
 ```
 
@@ -82,7 +70,7 @@ setUnsafe someLink {midAngle: 1.0}
 let angle2 = someLink # _midAngle -- this will return 1.0!
 ```
 
-This is a big break from pure FP principles, and the reason it was done this way is so that composition of getters was 1. cleaner and 2. more performant, since impure getters would imply additional function calls. This makes the code look a lot like TypeScript.
+This is a big break from pure FP principles, and the reason it was done this way is so that composition of getters was 1. cleaner and 2. more performant, since impure getters would imply additional function calls - an effectful computation, at the JS level, is implemented as a closure. This decision makes the code look a lot like TypeScript.
 
 2. #### Setting properties is not type-safe
 This was done in order to allow deeply nested effectful setting of properties in opaque types, for example:
@@ -100,10 +88,8 @@ setUnsafe someDiagram (_toolManager <<< _relinkingTool <<< _temporaryLink) someL
 This will probably be implemented in the future, as lenses also solve another problem, which is that different classes often have properties that are named the same, but with the current approach, there's no way to make the inputs polymorphic and type-safe; with lenses, they can be expressed on `newtype`d records that have a field named the right thing.
 
 ### TODO:
-[ ] - Handle TypeScript unions as Variants in order to avoid hand-rolling sum types - this is done in some methods already, see Animation.Methods
-[ ] - Implement GoJS's `IncrementalData`
-[ ] - Support optional arguments to methods - currently most optional methods are simply required by the bindings
-[ ] - Add documentation
-[ ] - Add rest of missing Prototype methods
-[ ] - Add missing Diagram methods
-[ ] - Address peppered TODOs
+ - [ ] Implement GoJS's `IncrementalData`
+ - [ ] Support optional arguments to methods - currently most optional methods are simply required by the bindings
+ - [ ] Add documentation
+ - [ ] Add rest of missing Prototype methods
+ - [ ] Address peppered TODOs
