@@ -1,7 +1,7 @@
 module GoJS.Layout.LayoutVertex.TreeVertex.Constructors where
 
 import Effect (Effect)
-import GoJS.Layout (TreeVertex_)
+import GoJS.Layout.Types (TreeVertex_)
 import GoJS.Unsafe (constructor0)
 
 newTreeVertex :: Effect TreeVertex_

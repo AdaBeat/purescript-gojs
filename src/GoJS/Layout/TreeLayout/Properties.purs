@@ -3,7 +3,6 @@ module GoJS.Layout.TreeLayout.Properties where
 import Data.Function.Uncurried (Fn2)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Size_, Spot_)
-import GoJS.Layout.LayoutVertex.TreeVertex.Properties (_portSpot)
 import GoJS.Layout.Types (TreeLayout_, TreeVertex_)
 import GoJS.Unsafe (getUnsafe)
 

@@ -1,6 +1,6 @@
 module GoJS.Layout.LayoutVertex.ForceDirectedVertex.Properties where
 
-import GoJS.Layout (ForceDirectedVertex_)
+import GoJS.Layout.Types (ForceDirectedVertex_)
 import GoJS.Unsafe (getUnsafe)
 
 _charge :: ForceDirectedVertex_ -> Number

@@ -1,6 +1,6 @@
 module GoJS.Layout.LayoutVertex.Static where
 
-import GoJS.Layout (class LayoutNetwork)
+import GoJS.Layout.Types (class LayoutNetwork)
 import GoJS.Unsafe (callStaticPure2)
 
 

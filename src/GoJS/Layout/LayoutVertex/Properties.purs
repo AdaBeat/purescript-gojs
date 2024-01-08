@@ -7,7 +7,7 @@ import Data.Nullable (toMaybe)
 import GoJS.Collection (Iterator_)
 import GoJS.Geometry.Types (Rect_)
 import GoJS.GraphObject.Types (class IsNode)
-import GoJS.Layout (class LayoutNetwork)
+import GoJS.Layout.Types (class LayoutNetwork)
 import GoJS.Unsafe (getUnsafe)
 
 _bounds :: forall _l _n _e v. LayoutNetwork _l _n _e v => v -> Maybe Rect_

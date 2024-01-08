@@ -8,7 +8,7 @@ import Data.Nullable (toMaybe)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Point_, Size_, Spot_)
 import GoJS.GraphObject.Types (Node_)
-import GoJS.Layout (TreeVertex_)
+import GoJS.Layout.Types (TreeVertex_)
 import GoJS.Unsafe (getUnsafe)
 
 _alignment :: TreeVertex_ -> EnumValue_

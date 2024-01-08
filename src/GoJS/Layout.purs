@@ -23,6 +23,6 @@ import GoJS.Layout.GridLayout.Properties hiding (_sorting, _spacing, _alignment,
 import GoJS.Layout.LayeredDigraphLayout.Constructors as LayeredDigraphLayout.Constructors
 import GoJS.Layout.LayeredDigraphLayout.Properties as LayeredDigraphLayout.Properties
 import GoJS.Layout.TreeLayout.Constructors as TreeLayout.Constructors
-import GoJS.Layout.TreeLayout.Properties hiding (_sorting, _comments, _layerSpacing) as TreeLayout.Properties
+import GoJS.Layout.TreeLayout.Properties hiding (_sorting, _comments, _layerSpacing, _arrangementSpacing, _comparer) as TreeLayout.Properties
 import GoJS.Layout.Types as Types
 -- import GoJS.Layout.CircularLayout.Methods

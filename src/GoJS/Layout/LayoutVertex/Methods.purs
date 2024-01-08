@@ -3,7 +3,7 @@ module GoJS.Layout.LayoutVertex.Methods where
 import Prelude
 
 import Effect (Effect)
-import GoJS.Layout (class LayoutNetwork)
+import GoJS.Layout.Types (class LayoutNetwork)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1)
 
 addDestinationEdge_ :: forall _l _n e v. LayoutNetwork _l _n e v => e -> v -> Effect Unit

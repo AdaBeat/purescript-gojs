@@ -3,7 +3,7 @@ module GoJS.Layout.CircularLayout.Methods where
 import Prelude
 
 import Effect (Effect)
-import GoJS.Layout (CircularLayout_)
+import GoJS.Layout.Types (CircularLayout_)
 import GoJS.Unsafe (callUnsafe0)
 
 commitLinks_ :: CircularLayout_ -> Effect Unit

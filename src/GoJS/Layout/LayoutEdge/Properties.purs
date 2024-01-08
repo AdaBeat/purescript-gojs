@@ -5,7 +5,7 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
 import GoJS.GraphObject.Types (Link_)
-import GoJS.Layout (class LayoutNetwork)
+import GoJS.Layout.Types (class LayoutNetwork)
 import GoJS.Unsafe (getUnsafe)
 
 _data :: forall _l n _e _v nodeData. LayoutNetwork _l n _e _v => n -> Maybe (Record nodeData)

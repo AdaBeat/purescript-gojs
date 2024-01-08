@@ -1,6 +1,6 @@
 module GoJS.Layout.LayoutEdge.LayeredDigraphEdge.Properties where
 
-import GoJS.Layout (LayeredDigraphEdge_)
+import GoJS.Layout.Types (LayeredDigraphEdge_)
 import GoJS.Unsafe (getUnsafe)
 
 _forest :: LayeredDigraphEdge_ -> Boolean

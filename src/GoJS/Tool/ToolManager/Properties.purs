@@ -4,7 +4,7 @@ import GoJS.Collection (List_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Size_)
 import GoJS.GraphObject.Types (Adornment_)
-import GoJS.Tool.Types (class IsTool, ActionTool_, ClickCreatingTool_, ClickSelectingTool_, ContextMenuTool_, DragSelectingTool_, DraggingTool_, LinkReshapingTool_, LinkingTool_, PanningTool_, RelinkingTool_, ResizingTool_, RotatingTool_, TextEditingTool_, ToolManager_)
+import GoJS.Tool.Types (ActionTool_, ClickCreatingTool_, ClickSelectingTool_, ContextMenuTool_, DragSelectingTool_, DraggingTool_, LinkReshapingTool_, LinkingTool_, PanningTool_, RelinkingTool_, ResizingTool_, RotatingTool_, TextEditingTool_, ToolManager_, Tool_)
 import GoJS.Unsafe (getUnsafe)
 
 _actionTool :: ToolManager_ -> ActionTool_
@@ -22,14 +22,14 @@ _contextMenuTool = getUnsafe [ "contextMenuTool" ]
 _currentToolTip :: ToolManager_ -> Adornment_
 _currentToolTip = getUnsafe [ "currentToolTip" ]
 
+_draggingTool :: ToolManager_ -> DraggingTool_
+_draggingTool = getUnsafe [ "draggingTool" ]
+
 _dragSelectingTool :: ToolManager_ -> DragSelectingTool_
 _dragSelectingTool = getUnsafe [ "dragSelectingTool" ]
 
 _dragSize :: ToolManager_ -> Size_
 _dragSize = getUnsafe [ "dragSize" ]
-
-_draggingTool :: ToolManager_ -> DraggingTool_
-_draggingTool = getUnsafe [ "draggingTool" ]
 
 _gestureBehavior :: ToolManager_ -> EnumValue_
 _gestureBehavior = getUnsafe [ "gestureBehavior" ]
@@ -40,11 +40,20 @@ _holdDelay = getUnsafe [ "holdDelay" ]
 _hoverDelay :: ToolManager_ -> Number
 _hoverDelay = getUnsafe [ "hoverDelay" ]
 
+_linkingTool :: ToolManager_ -> LinkingTool_
+_linkingTool = getUnsafe [ "linkingTool" ]
+
 _linkReshapingTool :: ToolManager_ -> LinkReshapingTool_
 _linkReshapingTool = getUnsafe [ "linkReshapingTool" ]
 
-_linkingTool :: ToolManager_ -> LinkingTool_
-_linkingTool = getUnsafe [ "linkingTool" ]
+_mouseDownTools :: ToolManager_ -> List_ Tool_
+_mouseDownTools = getUnsafe [ "mouseDownTools" ]
+
+_mouseMoveTools :: ToolManager_ -> List_ Tool_
+_mouseMoveTools = getUnsafe [ "mouseMoveTools" ]
+
+_mouseUpTools :: ToolManager_ -> List_ Tool_
+_mouseUpTools = getUnsafe [ "mouseUpTools" ]
 
 _mouseWheelBehavior :: ToolManager_ -> EnumValue_
 _mouseWheelBehavior = getUnsafe [ "mouseWheelBehavior" ]
@@ -66,12 +75,3 @@ _textEditingTool = getUnsafe [ "textEditingTool" ]
 
 _toolTipDuration :: ToolManager_ -> Number
 _toolTipDuration = getUnsafe [ "toolTipDuration" ]
-
-_mouseDownTools :: forall @t. IsTool t => ToolManager_ -> List_ t
-_mouseDownTools = getUnsafe [ "mouseDownTools" ]
-
-_mouseMoveTools :: forall @t. IsTool t => ToolManager_ -> List_ t
-_mouseMoveTools = getUnsafe [ "mouseMoveTools" ]
-
-_mouseUpTools :: forall @t. IsTool t => ToolManager_ -> List_ t
-_mouseUpTools = getUnsafe [ "mouseUpTools" ]

@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.Layout (LayeredDigraphVertex_)
+import GoJS.Layout.Types (LayeredDigraphVertex_)
 import GoJS.Unsafe (getUnsafe)
 
 _column :: LayeredDigraphVertex_ -> Number

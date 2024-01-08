@@ -1,7 +1,7 @@
 module GoJS.Layout.LayoutNetwork.Constructors where
 
 import Effect (Effect)
-import GoJS.Layout (CircularNetwork_, ForceDirectedNetwork_, LayeredDigraphNetwork_, TreeNetwork_)
+import GoJS.Layout.Types (CircularNetwork_, ForceDirectedNetwork_, LayeredDigraphNetwork_, TreeNetwork_)
 import GoJS.Unsafe (constructor0)
 
 newCircularNetwork :: Effect CircularNetwork_

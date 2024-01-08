@@ -1,8 +1,7 @@
 module GoJS.Model.Properties where
 
-import Effect.Uncurried (EffectFn1, EffectFn2)
-import GoJS.Model (UndoManager_)
-import GoJS.Model.Types (class IsModel)
+import Effect.Uncurried (EffectFn2)
+import GoJS.Model.Types (class IsModel, UndoManager_)
 import GoJS.Unsafe (getUnsafe)
 
 _copiesArrayObjects :: forall m. IsModel m => m -> Boolean

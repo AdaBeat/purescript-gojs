@@ -3,8 +3,7 @@ module GoJS.Layout.ForceDirectedLayout.Methods where
 import Prelude
 
 import Effect (Effect)
-import GoJS.Layout (ForceDirectedLayout_)
-import GoJS.Layout.Types (ForceDirectedEdge_, ForceDirectedVertex_)
+import GoJS.Layout.Types (ForceDirectedEdge_, ForceDirectedVertex_, ForceDirectedLayout_)
 import GoJS.Unsafe (callUnsafe0, callUnsafe1, callUnsafe2)
 
 addComments_ :: ForceDirectedVertex_ -> ForceDirectedLayout_ -> Effect Unit

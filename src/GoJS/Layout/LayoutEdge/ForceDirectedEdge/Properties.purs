@@ -1,6 +1,6 @@
 module GoJS.Layout.LayoutEdge.ForceDirectedEdge.Properties where
 
-import GoJS.Layout (ForceDirectedEdge_)
+import GoJS.Layout.Types (ForceDirectedEdge_)
 import GoJS.Unsafe (getUnsafe)
 
 _length :: ForceDirectedEdge_ -> Number
