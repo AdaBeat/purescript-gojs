@@ -4,18 +4,22 @@ workspace:
       path: ./
       needed_by: []
       dependencies:
-        - console
-        - lists
-        - nullable
-        - prelude
-        - typelevel-prelude
-        - variant
-        - web-events
-        - web-html
+        - effect: ">=4.0.0 <5.0.0"
+        - foldable-traversable: ">=6.0.0 <7.0.0"
+        - functions: ">=6.0.0 <7.0.0"
+        - lists: ">=7.0.0 <8.0.0"
+        - maybe: ">=6.0.0 <7.0.0"
+        - nullable: ">=6.0.0 <7.0.0"
+        - prelude: ">=6.0.1 <7.0.0"
+        - typelevel-prelude: ">=7.0.0 <8.0.0"
+        - unsafe-coerce: ">=6.0.0 <7.0.0"
+        - variant: ">=8.0.0 <9.0.0"
+        - web-events: ">=4.0.0 <5.0.0"
+        - web-html: ">=4.1.0 <5.0.0"
       test_dependencies: []
   package_set:
     address:
-      registry: 47.8.0
+      registry: 47.10.0
     compiler: ">=0.15.13 <0.16.0"
     content:
       abc-parser: 2.0.1
@@ -344,7 +348,7 @@ workspace:
       react-basic-storybook: 2.0.0
       react-dom: 8.0.0
       react-halo: 3.0.0
-      react-icons: 1.1.2
+      react-icons: 1.1.4
       react-markdown: 0.1.0
       react-testing-library: 4.0.1
       react-virtuoso: 1.0.0
@@ -352,6 +356,7 @@ workspace:
       recharts: 1.1.0
       record: 4.0.0
       record-extra: 5.0.1
+      record-ptional-fields: 0.1.2
       record-studio: 1.0.4
       refs: 6.0.0
       remotedata: 5.0.0
@@ -478,6 +483,7 @@ workspace:
       yoga-postgres: 6.0.0
       yoga-tree: 1.0.0
       z3: 0.0.2
+      zipperarray: 2.0.0
   extra_packages: {}
 packages:
   arrays:
@@ -515,16 +521,6 @@ packages:
         - newtype
         - prelude
         - tuples
-  console:
-    needed_by:
-      - gojs
-    package:
-      type: registry
-      version: 6.1.0
-      integrity: sha256-CxmAzjgyuGDmt9FZW51VhV6rBPwR6o0YeKUzA9rSzcM=
-      dependencies:
-        - effect
-        - prelude
   const:
     needed_by:
       - gojs
