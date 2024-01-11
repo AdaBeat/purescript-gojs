@@ -41,6 +41,5 @@ instance listFoldable :: Foldable List_ where
   foldr f acc = foldr f acc <<< toIterator_
   foldMap f = foldMap f <<< toIterator_
 
--- Question: Why is setFirst needed at all in GoJS? Aren't sets unordered?
 setFirst :: forall a. Set_ a -> Maybe a
 setFirst = toMaybe <<< setFirst_

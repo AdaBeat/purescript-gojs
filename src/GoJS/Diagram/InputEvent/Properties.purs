@@ -4,10 +4,11 @@ import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.Geometry.Types (Point_)
 import GoJS.Diagram.Types (class IsDiagram, InputEvent_)
+import GoJS.Geometry.Types (Point_)
 import GoJS.GraphObject.Types (class IsGraphObject)
 import GoJS.Unsafe (getUnsafe)
+import Web.Event.Event (Event)
 
 _alt :: forall d. IsDiagram d => InputEvent_ d -> Boolean
 _alt = getUnsafe [ "alt" ]
@@ -39,8 +40,9 @@ _documentPoint = getUnsafe [ "documentPoint" ]
 _down :: forall d. IsDiagram d => InputEvent_ d -> Boolean
 _down = getUnsafe [ "down" ]
 
--- _event :: forall d. IsDiagram d => InputEvent_ d -> Event
--- _event = getUnsafe ["event"]
+_event :: forall d. IsDiagram d => InputEvent_ d -> Event
+_event = getUnsafe ["event"]
+
 _handled :: forall d. IsDiagram d => InputEvent_ d -> Boolean
 _handled = getUnsafe [ "handled" ]
 

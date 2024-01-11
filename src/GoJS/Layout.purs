@@ -1,7 +1,6 @@
 module GoJS.Layout
   ( module CircularLayout.Constructors
   , module CircularLayout.Properties
- -- , module CircularLayout.Methods
   , module ForceDirectedLayout.Constructors
   , module ForceDirectedLayout.Properties
   , module GridLayout.Constructors
@@ -25,4 +24,3 @@ import GoJS.Layout.LayeredDigraphLayout.Properties as LayeredDigraphLayout.Prope
 import GoJS.Layout.TreeLayout.Constructors as TreeLayout.Constructors
 import GoJS.Layout.TreeLayout.Properties hiding (_sorting, _comments, _layerSpacing, _arrangementSpacing, _comparer) as TreeLayout.Properties
 import GoJS.Layout.Types as Types
--- import GoJS.Layout.CircularLayout.Methods

@@ -10,7 +10,7 @@ import GoJS.Geometry.Types (Rect_, Spot_)
 import GoJS.GraphObject.Picture.PictureElement (PictureElement, whichPictureElement)
 import GoJS.GraphObject.Types (Picture_)
 import GoJS.Unsafe (getUnsafe)
-import Web.Event.Internal.Types (Event)
+import Web.Event.Event (Event)
 
 _element :: Picture_ -> PictureElement
 _element = whichPictureElement <<< getUnsafe [ "element" ]

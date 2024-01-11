@@ -69,7 +69,6 @@ computePartsBounds_ coll includeLinks diagram = coll #
   )
 
 -- Optional parameters: check: boolean
--- TODO: This existential-key Map is a bit of a pain.
 copyParts_ :: forall d. IsDiagram d => Variant (array :: Array Part_, iterator :: Iterator_ Part_) -> Boolean -> d -> Effect (Map_ Part_ Part_)
 copyParts_ coll check diagram = coll #
   ( case_
@@ -173,8 +172,7 @@ layoutDiagram_ = callUnsafe1 "layoutDiagram"
 makeImage_ :: forall d. IsDiagram d => d -> Effect HTMLImageElement
 makeImage_ = callUnsafe0 "makeImage"
 
--- TODO: makeImageData is omitted because it returns a union type - we'd
--- like it to return a Variant, but that requires some fiddling in the JavaScript level.
+-- TODO: makeImageData is omitted because it returns a union type.
 
 -- Optional parameters excluded: options: SvgRendererOptions
 -- TODO: makeSvg is omitted because it returns an SVGElement - I couldn't find

@@ -2,11 +2,12 @@ module GoJS.GraphObject.Shape.Properties where
 
 import Prelude
 
+import Data.Function.Uncurried (Fn2)
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.GraphObject.Types (class IsGraphObject, Shape_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Geometry_, Rect_, Spot_)
+import GoJS.GraphObject.Types (class IsGraphObject, Shape_)
 import GoJS.Unsafe (getUnsafe)
 
 _figure :: Shape_ -> String
@@ -29,6 +30,9 @@ _geometryString = getUnsafe [ "geometryString" ]
 
 _graduatedEnd :: Shape_ -> Number
 _graduatedEnd = getUnsafe [ "graduatedEnd" ]
+
+_graduatedSkip :: Shape_ -> Maybe (Fn2 Number Shape_ Boolean)
+_graduatedSkip = toMaybe <<< getUnsafe [ "graduatedSkip" ]
 
 _graduatedStart :: Shape_ -> Number
 _graduatedStart = getUnsafe [ "graduatedStart" ]
@@ -80,4 +84,3 @@ _strokeWidth = getUnsafe [ "strokeWidth" ]
 
 _toArrow :: Shape_ -> String
 _toArrow = getUnsafe [ "toArrow" ]
--- graduatedSkip

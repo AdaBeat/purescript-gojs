@@ -1,8 +1,15 @@
 module GoJS.GraphObject.TextBlock.Properties where
 
-import GoJS.GraphObject.Types (TextBlock_)
+import Prelude
+
+import Data.Function.Uncurried (Fn2, Fn3)
+import Data.Maybe (Maybe)
+import Data.Nullable (toMaybe)
+import Effect.Uncurried (EffectFn3)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Spot_)
+import GoJS.GraphObject.Types (TextBlock_)
+import GoJS.Tool (HTMLInfo_)
 import GoJS.Unsafe (getUnsafe)
 
 _choices :: TextBlock_ -> Array String
@@ -10,6 +17,9 @@ _choices = getUnsafe [ "choices" ]
 
 _editable :: TextBlock_ -> Boolean
 _editable = getUnsafe [ "editable" ]
+
+_errorFunction :: TextBlock_ -> Maybe (EffectFn3 TextBlock_ String String Unit)
+_errorFunction = toMaybe <<< getUnsafe [ "errorFunction" ]
 
 _flip :: TextBlock_ -> EnumValue_
 _flip = getUnsafe [ "flip" ]
@@ -23,8 +33,14 @@ _formatting = getUnsafe [ "formatting" ]
 _graduatedEnd :: TextBlock_ -> Number
 _graduatedEnd = getUnsafe [ "graduatedEnd" ]
 
+_graduatedFunction :: TextBlock_ -> Maybe (Fn2 Number TextBlock_ Number)
+_graduatedFunction = toMaybe <<< getUnsafe [ "graduatedFunction" ]
+
 _graduatedStart :: TextBlock_ -> Number
 _graduatedStart = getUnsafe [ "graduatedStart" ]
+
+_graduatedSkip :: TextBlock_ -> Maybe (Fn2 Number TextBlock_ Boolean)
+_graduatedSkip = toMaybe <<< getUnsafe [ "graduatedSkip" ]
 
 _interval :: TextBlock_ -> Number
 _interval = getUnsafe [ "interval" ]
@@ -71,11 +87,17 @@ _text = getUnsafe [ "text" ]
 _textAlign :: TextBlock_ -> String
 _textAlign = getUnsafe [ "textAlign" ]
 
+_textEdited :: TextBlock_ -> Maybe (EffectFn3 TextBlock_ String String Unit)
+_textEdited = toMaybe <<< getUnsafe [ "textEdited" ]
+
+_textEditor :: TextBlock_ -> Maybe HTMLInfo_
+_textEditor = toMaybe <<< getUnsafe [ "textEditor" ]
+
+_textValidation :: TextBlock_ -> Maybe (Fn3 TextBlock_ String String Boolean)
+_textValidation = toMaybe <<< getUnsafe [ "textValidation" ]
+
 _verticalAlignment :: TextBlock_ -> Spot_
 _verticalAlignment = getUnsafe [ "verticalAlignment" ]
 
 _wrap :: TextBlock_ -> EnumValue_
 _wrap = getUnsafe [ "wrap" ]
--- textEdited, textEditor :: HTMLInfo, textValidation
--- graduatedFunction, graduatedSkip
--- errorFunction

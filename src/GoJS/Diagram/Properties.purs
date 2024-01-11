@@ -2,9 +2,11 @@ module GoJS.Diagram.Properties where
 
 import Prelude
 
+import Data.Function.Uncurried (Fn2)
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.Collection (Iterator_, Set_)
+import Effect.Uncurried (EffectFn1)
+import GoJS.Collection (Iterator_, Map_, Set_)
 import GoJS.Diagram.CommandHandler.Types (CommandHandler_)
 import GoJS.Diagram.Types (class IsDiagram, AnimationManager_, InputEvent_, Layer_)
 import GoJS.EnumValue (EnumValue_)
@@ -12,8 +14,9 @@ import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
 import GoJS.GraphObject.Types (class IsPanel, class IsPart, Adornment_, ContextMenu_, Group_, Link_, Node_, Part_, toContextMenu)
 import GoJS.Layout.Types (class IsLayout)
 import GoJS.Model.Types (class IsModel, UndoManager_)
-import GoJS.Tool.Types (ToolManager_)
+import GoJS.Tool.Types (ToolManager_, Tool_)
 import GoJS.Unsafe (getUnsafe)
+import Web.HTML (HTMLDivElement)
 
 _allowClipboard :: forall d. IsDiagram d => d -> Boolean
 _allowClipboard = getUnsafe [ "allowClipboard" ]
@@ -88,11 +91,17 @@ _autoScrollInterval = getUnsafe [ "autoScrollInterval" ]
 _autoScrollRegion :: forall d. IsDiagram d => d -> Margin_
 _autoScrollRegion = getUnsafe [ "autoScrollRegion" ]
 
+_click :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_click = toMaybe <<< getUnsafe [ "click" ]
+
 _commandHandler :: forall d. IsDiagram d => d -> CommandHandler_
 _commandHandler = getUnsafe [ "commandHandler" ]
 
 _contentAlignment :: forall d. IsDiagram d => d -> Spot_
 _contentAlignment = getUnsafe [ "contentAlignment" ]
+
+_contextClick :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_contextClick = toMaybe <<< getUnsafe [ "contextClick" ]
 
 _contextMenu :: forall d. IsDiagram d => d -> Maybe ContextMenu_
 _contextMenu = toContextMenu <<< getUnsafe [ "contextMenu" ]
@@ -100,15 +109,27 @@ _contextMenu = toContextMenu <<< getUnsafe [ "contextMenu" ]
 _currentCursor :: forall d. IsDiagram d => d -> String
 _currentCursor = getUnsafe [ "currentCursor" ]
 
+_currentTool :: forall d. IsDiagram d => d -> Tool_
+_currentTool = getUnsafe [ "currentTool" ]
+
 _defaultCursor :: forall d. IsDiagram d => d -> String
 _defaultCursor = getUnsafe [ "defaultCursor" ]
 
 _defaultScale :: forall d. IsDiagram d => d -> Number
 _defaultScale = getUnsafe [ "defaultScale" ]
 
+_defaultTool :: forall d. IsDiagram d => d -> Tool_
+_defaultTool = getUnsafe [ "defaultTool" ]
+
+_div :: forall d. IsDiagram d => d -> HTMLDivElement
+_div = getUnsafe [ "div" ]
+
 -- Read-only
 _documentBounds :: forall d. IsDiagram d => d -> Rect_
 _documentBounds = getUnsafe [ "documentBounds" ]
+
+_doubleClick :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_doubleClick = toMaybe <<< getUnsafe [ "doubleClick" ]
 
 _firstInput :: forall d. IsDiagram d => d -> InputEvent_ d
 _firstInput = getUnsafe [ "firstInput" ]
@@ -124,6 +145,9 @@ _groupSelectionAdornmentTemplate = toMaybe <<< getUnsafe [ "groupSelectionAdornm
 
 _groupTemplate :: forall d. IsDiagram d => d -> Maybe Group_
 _groupTemplate = toMaybe <<< getUnsafe [ "groupTemplate" ]
+
+_groupTemplateMap :: forall d. IsDiagram d => d -> Maybe (Map_ String Group_)
+_groupTemplateMap = toMaybe <<< getUnsafe [ "groupTemplateMap" ]
 
 _handlesDragDropForTopLevelParts :: forall d. IsDiagram d => d -> Boolean
 _handlesDragDropForTopLevelParts = getUnsafe [ "handlesDragDropForTopLevelParts" ]
@@ -190,6 +214,9 @@ _linkSelectionAdornmentTemplate = toMaybe <<< getUnsafe [ "linkSelectionAdornmen
 _linkTemplate :: forall d. IsDiagram d => d -> Link_
 _linkTemplate = getUnsafe [ "linkTemplate" ]
 
+_linkTemplateMap :: forall d. IsDiagram d => d -> Maybe (Map_ String Link_)
+_linkTemplateMap = toMaybe <<< getUnsafe [ "linkTemplateMap" ]
+
 -- Read-only
 _links :: forall d. IsDiagram d => d -> Iterator_ Link_
 _links = getUnsafe [ "links" ]
@@ -206,12 +233,36 @@ _minScale = getUnsafe [ "minScale" ]
 _model :: forall d @m. IsDiagram d => IsModel m => d -> m
 _model = getUnsafe [ "model" ]
 
+_mouseDragOver :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_mouseDragOver = toMaybe <<< getUnsafe [ "mouseDragOver" ]
+
+_mouseDrop :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_mouseDrop = toMaybe <<< getUnsafe [ "mouseDrop" ]
+
+_mouseEnter :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_mouseEnter = toMaybe <<< getUnsafe [ "mouseEnter" ]
+
+_mouseHold :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_mouseHold = toMaybe <<< getUnsafe [ "mouseHold" ]
+
+_mouseHover :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_mouseHover = toMaybe <<< getUnsafe [ "mouseHover" ]
+
+_mouseLeave :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_mouseLeave = toMaybe <<< getUnsafe [ "mouseLeave" ]
+
+_mouseOver :: forall d. IsDiagram d => d -> Maybe (EffectFn1 (InputEvent_ d) Unit)
+_mouseOver = toMaybe <<< getUnsafe [ "mouseOver" ]
+
 _nodeSelectionAdornmentTemplate :: forall d. IsDiagram d => d -> Maybe Adornment_
 _nodeSelectionAdornmentTemplate = toMaybe <<< getUnsafe [ "nodeSelectionAdornmentTemplate" ]
 
 -- Read-only
 _nodeTemplate :: forall d @p. IsDiagram d => IsPart p => d -> p
 _nodeTemplate = getUnsafe [ "nodeTemplate" ]
+
+_nodeTemplateMap :: forall d. IsDiagram d => d -> Maybe (Map_ String Part_)
+_nodeTemplateMap = toMaybe <<< getUnsafe [ "nodeTemplateMap" ]
 
 -- Read-only
 _nodes :: forall d. IsDiagram d => d -> Iterator_ Node_
@@ -230,11 +281,17 @@ _parts = getUnsafe [ "parts" ]
 _position :: forall d. IsDiagram d => d -> Point_
 _position = getUnsafe [ "position" ]
 
+_positionComputation :: forall d. IsDiagram d => d -> Maybe (Fn2 d Point_ Point_)
+_positionComputation = toMaybe <<< getUnsafe [ "positionComputation" ]
+
 _renderer :: forall d. IsDiagram d => d -> String
 _renderer = getUnsafe [ "renderer" ]
 
 _scale :: forall d. IsDiagram d => d -> Number
 _scale = getUnsafe [ "scale" ]
+
+_scaleComputation :: forall d. IsDiagram d => d -> Maybe (Fn2 d Number Number)
+_scaleComputation = toMaybe <<< getUnsafe [ "scaleComputation" ]
 
 _scrollHorizontalLineChange :: forall d. IsDiagram d => d -> Number
 _scrollHorizontalLineChange = getUnsafe [ "scrollHorizontalLineChange" ]
@@ -277,15 +334,3 @@ _viewportBounds = getUnsafe [ "viewportBounds" ]
 
 _zoomPoint :: forall d. IsDiagram d => d -> Point_
 _zoomPoint = getUnsafe [ "zoomPoint" ]
--- positionComputation
--- scaleComputation
--- , nodeTemplateMap :: Map_ String Part_
--- mouseDragOver, mouseDrop, mouseEnter, mouseHold, mouseHover, mouseLeave, mouseOver
--- , linkTemplateMap :: Map_ String Link_
--- click, commandHandler, contextClick
---, groupTemplateMap :: Map_ String Group_
--- , layers :: Iterator_ Layer_
--- doubleClick
---, defaultTool :: Tool_ 
--- div
---, currentTool :: Tool_

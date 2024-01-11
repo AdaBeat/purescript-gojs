@@ -7,7 +7,7 @@ import Data.Nullable (toMaybe)
 import GoJS.Diagram.Types (Diagram_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
-import GoJS.GraphObject.Types (class IsGraphObject, class IsPart, Adornment_, ContextMenu_, Panel_, toContextMenu)
+import GoJS.GraphObject.Types (class IsGraphObject, class IsPanel, class IsPart, ContextMenu_, toContextMenu)
 import GoJS.Unsafe (getUnsafe)
 
 -- Read-only
@@ -104,7 +104,7 @@ _opacity :: forall g. IsGraphObject g => g -> Number
 _opacity = getUnsafe [ "opacity" ]
 
 -- Read-only
-_panel :: forall g. IsGraphObject g => g -> Maybe Panel_
+_panel :: forall g @p. IsGraphObject g => IsPanel p => g -> Maybe p
 _panel = toMaybe <<< getUnsafe [ "panel" ]
 
 -- Read-only
@@ -168,9 +168,9 @@ _toShortLengh = getUnsafe [ "toShortLengh" ]
 _toSpot :: forall g. IsGraphObject g => g -> Spot_
 _toSpot = getUnsafe [ "toSpot" ]
 
--- TODO: Can be HTMLInfo.
-_toolTip :: forall g. IsGraphObject g => g -> Maybe Adornment_
-_toolTip = toMaybe <<< getUnsafe [ "toolTip" ]
+-- TODO: ToolTip has the same type as ContextMenu, perhaps change the type's name.
+_toolTip :: forall g. IsGraphObject g => g -> Maybe ContextMenu_
+_toolTip = toContextMenu <<< getUnsafe [ "toolTip" ]
 
 _visible :: forall g. IsGraphObject g => g -> Boolean
 _visible = getUnsafe [ "visible" ]

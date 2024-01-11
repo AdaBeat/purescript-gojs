@@ -1,7 +1,10 @@
 module GoJS.Model.ChangedEvent.Properties where
 
+import Prelude
+
 import GoJS.Diagram.Types (class IsDiagram)
 import GoJS.EnumValue (EnumValue_)
+import GoJS.Key (KeyProperty, toKeyProperty)
 import GoJS.Model.Types (class IsModel, ChangedEvent_)
 import GoJS.Unsafe (getUnsafe)
 
@@ -36,6 +39,5 @@ _oldParam = getUnsafe [ "oldParam" ]
 _oldValue :: forall t. ChangedEvent_ -> t
 _oldValue = getUnsafe [ "oldValue" ]
 
--- TODO: Can be a function to property name.
-_propertyName :: ChangedEvent_ -> String
-_propertyName = getUnsafe [ "propertyName" ]
+_propertyName :: forall nodeData @kt. ChangedEvent_ -> KeyProperty nodeData kt
+_propertyName = toKeyProperty <<< getUnsafe [ "propertyName" ]

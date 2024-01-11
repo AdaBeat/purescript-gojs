@@ -5,7 +5,6 @@ import GoJS.GraphObject.Types (class IsGraphObject)
 import GoJS.Tool.Types (LinkingTool_)
 import GoJS.Unsafe (getUnsafe)
 
--- Properties from LinkingTool:
 _archetypeLabelNodeData :: forall nodeData. LinkingTool_ -> Record nodeData
 _archetypeLabelNodeData = getUnsafe ["archetypeLabelNodeData"]
 

@@ -31,7 +31,6 @@ _fromNode = toMaybe <<< getUnsafe [ "fromNode" ]
 _fromPort :: forall @g. IsGraphObject g => Link_ -> Maybe g
 _fromPort = toMaybe <<< getUnsafe [ "fromPort" ]
 
--- 
 _fromPortChanged :: forall g1 g2. IsGraphObject g1 => IsGraphObject g2 => Link_ -> Maybe (EffectFn3 Link_ g1 g2 Unit)
 _fromPortChanged = toMaybe <<< getUnsafe [ "fromPortChanged" ]
 
