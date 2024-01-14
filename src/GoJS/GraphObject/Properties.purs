@@ -4,11 +4,24 @@ import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (toMaybe)
-import GoJS.Diagram.Types (Diagram_, Layer_)
+import Effect.Uncurried (EffectFn2, EffectFn3)
+import GoJS.Diagram.Types (class IsDiagram, Diagram_, InputEvent_, Layer_)
 import GoJS.EnumValue (EnumValue_)
 import GoJS.Geometry.Types (Margin_, Point_, Rect_, Size_, Spot_)
 import GoJS.GraphObject.Types (class IsGraphObject, class IsPanel, class IsPart, ContextMenu_, toContextMenu)
 import GoJS.Unsafe (getUnsafe)
+
+_actionCancel :: forall g d. IsGraphObject g => IsDiagram d => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_actionCancel = toMaybe <<< getUnsafe [ "actionCancel" ]
+
+_actionDown :: forall g d. IsGraphObject g => IsDiagram d => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_actionDown = toMaybe <<< getUnsafe [ "actionDown" ]
+
+_actionMove :: forall g d. IsGraphObject g => IsDiagram d => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_actionMove = toMaybe <<< getUnsafe [ "actionMove" ]
+
+_actionUp :: forall g d. IsGraphObject g => IsDiagram d => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_actionUp = toMaybe <<< getUnsafe [ "actionUp" ]
 
 -- Read-only
 _actualBounds :: forall g. IsGraphObject g => g -> Rect_
@@ -25,6 +38,12 @@ _angle = getUnsafe [ "angle" ]
 
 _background :: forall g. IsGraphObject g => g -> String -- TODO: Could be Brush
 _background = getUnsafe [ "background" ]
+
+_click :: forall g d. IsDiagram d => IsGraphObject g => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_click = toMaybe <<< getUnsafe [ "click" ]
+
+_contextClick :: forall g d. IsDiagram d => IsGraphObject g => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_contextClick = toMaybe <<< getUnsafe [ "contextClick" ]
 
 _column :: forall g. IsGraphObject g => g -> Number
 _column = getUnsafe [ "column" ]
@@ -45,6 +64,12 @@ _desiredSize = getUnsafe [ "desiredSize" ]
 -- TODO: Can be null, but in the vast majority of cases is not.
 _diagram :: forall g. IsGraphObject g => g -> Diagram_
 _diagram = getUnsafe [ "diagram" ]
+
+_doubleClick :: forall g d. IsDiagram d => IsGraphObject g => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_doubleClick = toMaybe <<< getUnsafe [ "doubleClick" ]
+
+_enabledChanged :: forall g. IsGraphObject g => g -> Maybe (EffectFn2 g Boolean Unit)
+_enabledChanged = toMaybe <<< getUnsafe [ "enabledChanged" ]
 
 _fromEndSegmentLength :: forall g. IsGraphObject g => g -> Number
 _fromEndSegmentLength = getUnsafe [ "fromEndSegmentLength" ]
@@ -92,6 +117,30 @@ _measuredBounds = getUnsafe [ "measuredBounds" ]
 
 _minSize :: forall g. IsGraphObject g => g -> Size_
 _minSize = getUnsafe [ "minSize" ]
+
+_mouseDragEnter :: forall g1 g2 d. IsDiagram d => IsGraphObject g1 => IsGraphObject g2 => g1 -> Maybe (EffectFn3 (InputEvent_ d) g1 g2 Unit)
+_mouseDragEnter = toMaybe <<< getUnsafe [ "mouseDragEnter" ]
+
+_mouseDragLeave :: forall g1 g2 d. IsDiagram d => IsGraphObject g1 => IsGraphObject g2 => g1 -> Maybe (EffectFn3 (InputEvent_ d) g1 g2 Unit)
+_mouseDragLeave = toMaybe <<< getUnsafe [ "mouseDragLeave" ]
+
+_mouseDrop :: forall g d. IsDiagram d => IsGraphObject g => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_mouseDrop = toMaybe <<< getUnsafe [ "mouseDrop" ]
+
+_mouseEnter :: forall g1 g2 d. IsDiagram d => IsGraphObject g1 => IsGraphObject g2 => g1 -> Maybe (EffectFn3 (InputEvent_ d) g1 g2 Unit)
+_mouseEnter = toMaybe <<< getUnsafe [ "mouseEnter" ]
+
+_mouseHold :: forall g d. IsDiagram d => IsGraphObject g => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_mouseHold = toMaybe <<< getUnsafe [ "mouseHold" ]
+
+_mouseHover :: forall g d. IsDiagram d => IsGraphObject g => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_mouseHover = toMaybe <<< getUnsafe [ "mouseHover" ]
+
+_mouseLeave :: forall g1 g2 d. IsDiagram d => IsGraphObject g1 => IsGraphObject g2 => g1 -> Maybe (EffectFn3 (InputEvent_ d) g1 g2 Unit)
+_mouseLeave = toMaybe <<< getUnsafe [ "mouseLeave" ]
+
+_mouseOver :: forall g d. IsDiagram d => IsGraphObject g => g -> Maybe (EffectFn2 (InputEvent_ d) g Unit)
+_mouseOver = toMaybe <<< getUnsafe [ "mouseOver" ]
 
 _name :: forall g. IsGraphObject g => g -> String
 _name = getUnsafe [ "name" ]
